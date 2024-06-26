@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { LIGHT_THEME } from "../../constants/themeConstants";
 import LogoBlue from "../../assets/images/logo_blue.svg";
@@ -15,7 +15,7 @@ import {
   MdOutlineSettings,
   MdOutlineShoppingBag,
 } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Sidebar.scss";
 import { SidebarContext } from "../../context/SidebarContext";
 
@@ -23,13 +23,16 @@ const Sidebar = () => {
   const { theme } = useContext(ThemeContext);
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   const navbarRef = useRef(null);
+  const location = useLocation(); // To get the current location (route)
 
-  // closing the navbar when clicked outside the sidebar area
+  const [activeLink, setActiveLink] = useState(""); // State to manage active link
+
+  // Closing the navbar when clicked outside the sidebar area
   const handleClickOutside = (event) => {
     if (
       navbarRef.current &&
       !navbarRef.current.contains(event.target) &&
-      event.target.className !== "sidebar-oepn-btn"
+      event.target.className !== "sidebar-open-btn"
     ) {
       closeSidebar();
     }
@@ -42,10 +45,20 @@ const Sidebar = () => {
     };
   }, []);
 
+  // Update active link when location changes
+  useEffect(() => {
+    // Extract the pathname from location
+    const pathname = location.pathname;
+
+    // Update active link based on the current pathname
+    setActiveLink(pathname);
+  }, [location]);
+
   return (
     <nav
       className={`sidebar ${isSidebarOpen ? "sidebar-show" : ""}`}
-      ref={navbarRef}>
+      ref={navbarRef}
+    >
       <div className="sidebar-top">
         <div className="sidebar-brand">
           <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
@@ -59,7 +72,10 @@ const Sidebar = () => {
         <div className="sidebar-menu">
           <ul className="menu-list">
             <li className="menu-item">
-              <Link to="/" className="menu-link active">
+              <Link
+                to="/"
+                className={`menu-link ${activeLink === "/" ? "active" : ""}`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
                 </span>
@@ -67,7 +83,12 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/statistics"
+                className={`menu-link ${
+                  activeLink === "/statistics" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineBarChart size={20} />
                 </span>
@@ -75,7 +96,12 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/payment"
+                className={`menu-link ${
+                  activeLink === "/payment" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineAttachMoney size={20} />
                 </span>
@@ -83,16 +109,25 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/orders"
+                className={`menu-link ${
+                  activeLink === "/orders" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineCurrencyExchange size={18} />
                 </span>
-                {/* <span className="menu-link-text">Transactions</span> */}
                 <span className="menu-link-text">Orders</span>
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/products" className="menu-link">
+              <Link
+                to="/products"
+                className={`menu-link ${
+                  activeLink === "/products" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineShoppingBag size={20} />
                 </span>
@@ -100,7 +135,12 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/customer"
+                className={`menu-link ${
+                  activeLink === "/customer" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlinePeople size={20} />
                 </span>
@@ -108,7 +148,12 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/messages"
+                className={`menu-link ${
+                  activeLink === "/messages" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineMessage size={18} />
                 </span>
@@ -121,7 +166,12 @@ const Sidebar = () => {
         <div className="sidebar-menu sidebar-menu2">
           <ul className="menu-list">
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/settings"
+                className={`menu-link ${
+                  activeLink === "/settings" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineSettings size={20} />
                 </span>
@@ -129,7 +179,12 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link to="/" className="menu-link">
+              <Link
+                to="/logout"
+                className={`menu-link ${
+                  activeLink === "/logout" ? "active" : ""
+                }`}
+              >
                 <span className="menu-link-icon">
                   <MdOutlineLogout size={20} />
                 </span>

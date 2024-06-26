@@ -1,0 +1,49 @@
+.content-order-menu {
+  height: 51px;
+  margin-top: 30px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: nowrap;
+  font-size: 12px;
+  border-bottom: 1px solid var(--base-text-color);
+  color: var(--text-color-inverted);
+  position: relative;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Hide scrollbar for Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar for Webkit/Blink */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .order-menu-option {
+    cursor: pointer;
+    padding: 10px 25px;
+    margin: 5px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    white-space: nowrap; /* Prevent wrapping */
+
+    &.selected {
+      color: #ffcc3e;
+      font-weight: bold;
+    }
+
+    &:hover {
+      color: #ffcc3e;
+    }
+  }
+
+  .active-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 4px;
+    border-radius: 10px 10px 0 0;
+    background-color: #ffcc3e;
+    transition: left 0.3s ease, width 0.3s ease;
+  }
+}
