@@ -2,6 +2,7 @@ import React from "react";
 import "../login/LoginPage.scss";
 import logo from "../../assets/images/logo.png"; // Adjust the path based on your project structure
 import logni_pic from "../../assets/images/login.png";
+import { Link } from 'react-router-dom';
 
 const LoginPage = () => {
   return (
@@ -19,11 +20,14 @@ const LoginPage = () => {
           <input type="password" placeholder="Password" />
           <label>
             <input type="checkbox" />
-            Remember Me
+            <p className="me">Remember Me</p>
           </label>
-          <button type="submit">
+          {/* <button type="submit">
             <a href="/dashboard">Sign in</a>
-          </button>
+          </button> */}
+          <Link to="/dashboard">
+            <button type="submit">Sign in</button>
+          </Link>
         </form>
         <p>If Feeling lazy?</p>
         <div className="social-buttons">
