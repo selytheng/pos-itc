@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { LIGHT_THEME } from "../../constants/themeConstants";
 import LogoBlue from "../../assets/images/logo_blue.svg";
@@ -11,6 +10,7 @@ import {
   MdOutlineCurrencyExchange,
   MdOutlineGridView,
   MdOutlineLogout,
+  MdOutlineMessage,
   MdOutlinePeople,
   MdOutlineSettings,
   MdOutlineShoppingBag,
@@ -28,12 +28,10 @@ const Sidebar = () => {
   const [activeLink, setActiveLink] = useState(""); // State to manage active link
 
   // Closing the navbar when clicked outside the sidebar area
-  // Closing the navbar when clicked outside the sidebar area
   const handleClickOutside = (event) => {
     if (
       navbarRef.current &&
       !navbarRef.current.contains(event.target) &&
-      event.target.className !== "sidebar-open-btn"
       event.target.className !== "sidebar-open-btn"
     ) {
       closeSidebar();
@@ -118,7 +116,7 @@ const Sidebar = () => {
                 }`}
               >
                 <span className="menu-link-icon">
-                  <MdOutlineCurrencyExchange size={20} />
+                  <MdOutlineCurrencyExchange size={18} />
                 </span>
                 <span className="menu-link-text">Orders</span>
               </Link>
@@ -157,9 +155,9 @@ const Sidebar = () => {
                 }`}
               >
                 <span className="menu-link-icon">
-                  <MdOutlinePeople size={20} />
+                  <MdOutlineMessage size={18} />
                 </span>
-                <span className="menu-link-text">User</span>
+                <span className="menu-link-text">Messages</span>
               </Link>
             </li>
           </ul>

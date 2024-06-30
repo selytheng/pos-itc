@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+// import { useEffect } from "react";
 import "../statistics/StatisticsPage.scss";
 import { Pie } from "react-chartjs-2";
 // import user_img from "../../assets/images/girl.png"
@@ -133,7 +133,7 @@ const StatisticsPage = () => {
             <tbody>
               {orders.map((order, index) => (
                 <tr key={index}>
-                  <td >
+                  <td>
                     {/* <img
                       src={user_img}
                       alt="Customer"
