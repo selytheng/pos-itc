@@ -56,7 +56,7 @@
       }
 
       .product-title-container {
-        height: 20%;
+        height: 10%;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -67,6 +67,92 @@
         height: 10%;
         display: flex;
         align-items: center;
+
+        .input-wrapper {
+          width: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .product-price-container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: end;
+          align-items: center;
+          gap: 5px;
+          border-right: 1px solid var(--primary-color);
+
+          .product-price-prefix {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 20px;
+          }
+
+          input#product-price {
+            width: 100%;
+            height: 100%;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            background-color: transparent;
+            color: var(--primary-color);
+
+            text-align: start;
+            overflow: auto;
+            resize: none;
+
+            &::placeholder {
+              text-align: start;
+            }
+
+            &:focus {
+              border: none;
+              outline: none;
+              box-shadow: none;
+            }
+          }
+        }
+
+        .product-stock-container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          gap: 5px;
+          border-left: 1px solid var(--primary-color);
+
+          .product-stock-suffix {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 20px;
+          }
+
+          input#product-stock {
+            width: 100%;
+            height: 100%;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            background-color: transparent;
+            color: var(--primary-color);
+            text-align: end;
+            overflow: auto;
+            resize: none;
+
+            &::placeholder {
+              text-align: end;
+            }
+
+            &:focus {
+              border: none;
+              outline: none;
+              box-shadow: none;
+            }
+          }
+        }
       }
 
       .form-group {
@@ -151,86 +237,6 @@
             border: none;
             outline: none;
             box-shadow: none;
-          }
-        }
-
-        textarea#product-price {
-          width: 50%;
-          height: 100%;
-          border: none;
-          font-size: 20px;
-          font-weight: 700;
-          background-color: transparent;
-          color: var(--primary-color);
-          text-align: start;
-          overflow: auto;
-          resize: none;
-          padding-top: 17%;
-
-          &::placeholder {
-            text-align: start;
-          }
-
-          &:focus {
-            border: none;
-            outline: none;
-            box-shadow: none;
-          }
-        }
-
-        textarea#product-stock {
-          width: 50%;
-          height: 100%;
-          border: none;
-          font-size: 20px;
-          font-weight: 700;
-          background-color: transparent;
-          color: var(--primary-color);
-          text-align: end;
-          overflow: auto;
-          resize: none;
-          padding-top: 17%;
-
-          &::placeholder {
-            text-align: end;
-          }
-
-          &:focus {
-            border: none;
-            outline: none;
-            box-shadow: none;
-          }
-        }
-
-        .product-price-container {
-          width: 100%;
-          height: 8%;
-          display: flex;
-          justify-content: end;
-          align-items: center;
-          gap: 5px;
-          border-right: 1px solid var(--primary-color);
-
-          .product-price-prefix {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 20px;
-          }
-        }
-
-        .product-stock-container {
-          width: 100%;
-          height: 10%;
-          display: flex;
-          justify-content: start;
-          align-items: center;
-          gap: 5px;
-          border-left: 1px solid var(--primary-color);
-
-          .product-stock-suffix {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 20px;
           }
         }
       }

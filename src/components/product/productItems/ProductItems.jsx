@@ -189,10 +189,10 @@ const ProductItemCards = ({ selectedMenu }) => {
               </div>
 
               <div className="product-price-stock-container">
-                <div className="form-group">
-                  <div className="product-price-container">
-                    <div className="product-price-prefix">$</div>
-                    <textarea
+                <div className="product-price-container">
+                  <div className="product-price-prefix">$</div>
+                  <div className="input-wrapper">
+                    <input
                       id="product-price"
                       name="price"
                       placeholder="Price"
@@ -202,17 +202,17 @@ const ProductItemCards = ({ selectedMenu }) => {
                   </div>
                 </div>
 
-                <div className="form-group">
-                  <div className="product-stock-container">
-                    <textarea
+                <div className="product-stock-container">
+                  <div className="input-wrapper">
+                    <input
                       id="product-stock"
                       name="stock"
                       placeholder="Stock"
                       value={newProduct.stock}
                       onChange={handleInputChange}
                     />
-                    <div className="product-stock-suffix">stocks</div>
                   </div>
+                  <div className="product-stock-suffix">stocks</div>
                 </div>
               </div>
 
