@@ -7,3 +7,6 @@ export { default as OrderTop } from "./order/orderTop/OrderTop";
 export { default as OrderMenu } from "./order/orderMenu/OrderMenu";
 export { default as OrderItems } from "./order/orderItems/OrderItems";
 export { default as OrderPayment } from "./order/orderPayment/OrderPayment";
+export { default as ProductTop } from "./product/productTop/ProductTop";
+export { default as ProductMenu } from "./product/productMenu/ProductMenu";
+export { default as ProductItems } from "./product/productItems/ProductItems";

@@ -6,10 +6,11 @@ const OrderItemCard = ({ cardInfo }) => {
   return (
     <div className="order-card">
       <div className="order-card-info">
-        <img className="info-image" src={image} />
-        <h5 className="info-title">{title}</h5>
-        <div className="info-value">{value}</div>
-        <p className="info-stock">{stock}</p>
+        <img className="order-info-image" src={image} />
+        <h5 className="order-info-title">{title}</h5>
+        <div className="order-info-value">{value}</div>
+        <p className="order-info-stock">{stock}</p>
+        <button className="order-info-add">ADD</button>
       </div>
     </div>
   );

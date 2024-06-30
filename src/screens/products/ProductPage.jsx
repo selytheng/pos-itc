@@ -1,7 +1,17 @@
-import React from "react";
+import { ProductItems, ProductMenu, ProductTop } from "../../components";
+import { useState } from "react";
 
-function ProductPage() {
-  return <div>Product Page</div>;
-}
+const Product = () => {
+  const [selectedMenu, setSelectedMenu] = useState("Foods");
+  return (
+    <div className="content-area">
+      <ProductTop />
+      <ProductMenu onSelectMenu={setSelectedMenu} selectedMenu={selectedMenu} />
+      <div className="item-area">
+        <ProductItems selectedMenu={selectedMenu} />
+      </div>
+    </div>
+  );
+};
 
-export default ProductPage;
+export default Product;
