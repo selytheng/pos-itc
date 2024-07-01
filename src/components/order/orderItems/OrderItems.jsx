@@ -14,7 +14,7 @@ const foodsData = [
   },
   {
     image: SaladImage,
-    title: "Sandwich",
+    title: "Pizza",
     value: "$2.99",
     stock: "214 Blows available",
   },

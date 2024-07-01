@@ -1,30 +1,83 @@
-.content-product-menu {
-  height: 51px;
-  margin-top: 30px;
+.content-product-menu-container {
   display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: nowrap;
-  font-size: 12px;
-  border-bottom: 1px solid var(--base-text-color);
-  color: var(--text-color-inverted);
-  position: relative;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  align-items: center;
 
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    display: none;
+  .content-product-menu {
+    width: 95%;
+    height: 51px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: nowrap;
+    font-size: 12px;
+    border-bottom: 1px solid var(--base-text-color);
+    color: var(--text-color-inverted);
+    position: relative;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product-menu-option {
+      cursor: pointer;
+      padding: 10px 25px;
+      margin: 5px;
+      transition: color 0.3s ease, background-color 0.3s ease;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+
+      .delete-icon {
+        margin-right: 8px;
+        cursor: pointer;
+        &:hover {
+          color: red;
+        }
+      }
+
+      &.selected {
+        color: #ffcc3e;
+        font-weight: bold;
+      }
+
+      &:hover {
+        color: #ffcc3e;
+      }
+    }
+
+    .active-indicator {
+      position: absolute;
+      bottom: 0;
+      height: 4px;
+      border-radius: 10px 10px 0 0;
+      background-color: #ffcc3e;
+      transition: left 0.3s ease, width 0.3s ease;
+    }
+
+    .add-category {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input {
+      padding: 5px;
+      border: 1px solid var(--base-text-color);
+      border-radius: 4px;
+    }
   }
 
-  .product-menu-option {
+  .product-menu-settings {
+    width: 5%;
+    display: flex;
+    justify-content: center;
     cursor: pointer;
-    padding: 10px 25px;
-    margin: 5px;
     transition: color 0.3s ease, background-color 0.3s ease;
-    white-space: nowrap; /* Prevent wrapping */
 
     &.selected {
       color: #ffcc3e;
@@ -34,14 +87,5 @@
     &:hover {
       color: #ffcc3e;
     }
-  }
-
-  .active-indicator {
-    position: absolute;
-    bottom: 0;
-    height: 4px;
-    border-radius: 10px 10px 0 0;
-    background-color: #ffcc3e;
-    transition: left 0.3s ease, width 0.3s ease;
   }
 }

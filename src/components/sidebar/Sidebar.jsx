@@ -10,7 +10,6 @@ import {
   MdOutlineCurrencyExchange,
   MdOutlineGridView,
   MdOutlineLogout,
-  MdOutlineMessage,
   MdOutlinePeople,
   MdOutlineSettings,
   MdOutlineShoppingBag,
@@ -149,15 +148,15 @@ const Sidebar = () => {
             </li>
             <li className="menu-item">
               <Link
-                to="/messages"
+                to="/user"
                 className={`menu-link ${
-                  activeLink === "/messages" ? "active" : ""
+                  activeLink === "/user" ? "active" : ""
                 }`}
               >
                 <span className="menu-link-icon">
-                  <MdOutlineMessage size={18} />
+                  <MdOutlinePeople size={20} />
                 </span>
-                <span className="menu-link-text">Messages</span>
+                <span className="menu-link-text">Users</span>
               </Link>
             </li>
           </ul>

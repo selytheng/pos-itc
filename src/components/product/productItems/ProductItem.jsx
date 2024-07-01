@@ -7,7 +7,12 @@ const ProductItemCard = ({ cardInfo }) => {
   return (
     <div className="product-card">
       <div className="product-card-info">
-        <img className="product-info-image" src={image} />
+        <img
+          className="product-info-image"
+          src={`http://34.123.7.14/${image}`}
+          alt={title}
+        />{" "}
+        {/* Added base URL */}
         <h5 className="product-info-title">{title}</h5>
         <div className="product-info-price-stock">
           <div className="product-info-price-container">
@@ -27,8 +32,13 @@ const ProductItemCard = ({ cardInfo }) => {
   );
 };
 
-export default ProductItemCard;
-
 ProductItemCard.propTypes = {
-  cardInfo: PropTypes.object.isRequired,
+  cardInfo: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired, // Note: API returns price as a string
+    stock: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+  }).isRequired,
 };
+
+export default ProductItemCard;

@@ -19,9 +19,7 @@ const OrderTop = () => {
         <h2 className="order-top-title">Orders</h2>
       </div>
       <div className="order-top-r">
-        <div className="search-wrapper">
-          <input type="text" placeholder="Search..." className="search-input" />
-        </div>
+        <input type="text" placeholder="Search..." className="search-input" />
       </div>
     </section>
   );
