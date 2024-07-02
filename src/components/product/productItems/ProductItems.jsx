@@ -44,6 +44,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
 
         const data = await response.json();
         const mappedItems = data.map((item) => ({
+          id: item.id,
           name: item.name,
           price: item.unit_price,
           stock: item.quantity,
