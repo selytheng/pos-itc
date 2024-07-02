@@ -14,26 +14,31 @@ const OrderPayment = () => {
     { id: 3, title: "Sandwich", price: 2.49, qty: 3, instructions: "" },
   ]);
 
+  // Order payment option
   const handleButtonOrderPaymentOptionClick = (option) => {
     setActiveOption(option);
   };
 
+  // Delete button
   const handleDeleteClick = (id) => {
     setItems(items.filter((item) => item.id !== id));
   };
 
+  // Instruction input
   const handleInstructionsChange = (id, instructions) => {
     setItems(
       items.map((item) => (item.id === id ? { ...item, instructions } : item))
     );
   };
 
+  // Calculate subtotal
   const subtotal = useMemo(
     () =>
       items.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2),
     [items]
   );
 
+  // Format order number
   const formatOrderNumber = (number) => {
     return number.toString().padStart(7, "0");
   };

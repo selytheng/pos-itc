@@ -1,125 +1,87 @@
-import React, { useEffect } from "react";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import OrderItemCard from "./OrderItem";
 import "./OrderItems.scss";
-import SaladImage from "../../../assets/images/salad.png";
 import PropTypes from "prop-types";
+import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 
-const foodsData = [
-  {
-    image: SaladImage,
-    title: "Hamburger",
-    value: "$6.99",
-    stock: "123 Blows available",
-  },
-  {
-    image: SaladImage,
-    title: "Pizza",
-    value: "$2.99",
-    stock: "214 Blows available",
-  },
-  {
-    image: SaladImage,
-    title: "Pizza",
-    value: "$14.99",
-    stock: "50 Blows available",
-  },
-  {
-    image: SaladImage,
-    title: "Rice",
-    value: "$4.99",
-    stock: "0 Blows available",
-  },
-];
-
-const fruitsData = [
-  {
-    image: SaladImage,
-    title: "Apple",
-    value: "$2.99",
-    stock: "168 Blows available",
-  },
-  {
-    image: SaladImage,
-    title: "Banana",
-    value: "$0.99",
-    stock: "100 Blows available",
-  },
-  {
-    image: SaladImage,
-    title: "Orange",
-    value: "$1.99",
-    stock: "200 Blows available",
-  },
-];
-
-const OrderItemCards = ({ selectedMenu }) => {
-  const [dropdownOpenSubcategory, setDropdownOpenSubcategory] =
-    React.useState(false);
-  const [selectedSubcategoryOption, setSubcategoryOption] =
-    React.useState("All");
-
-  const [dropdownOpenSort, setDropdownOpenSort] = React.useState(false);
-  const [sortBy, setSortBy] = React.useState("Default");
-
-  let itemsToDisplay = [];
-  let dropdownOptions = ["All"];
-  let sortedItems = [];
-
-  switch (selectedMenu) {
-    case "Foods":
-      itemsToDisplay = foodsData;
-      dropdownOptions = ["All", "Hamburger", "Pizza", "Rice", "Sandwich"];
-      break;
-    case "Fruits":
-      itemsToDisplay = fruitsData;
-      dropdownOptions = ["All", "Apple", "Banana", "Orange"];
-      break;
-    default:
-      itemsToDisplay = foodsData;
-      dropdownOptions = ["All"];
-  }
-
-  // Sorting function based on sortBy state
-  switch (sortBy) {
-    case "A-Z":
-      sortedItems = itemsToDisplay
-        .slice()
-        .sort((a, b) => a.title.localeCompare(b.title));
-      break;
-    case "Z-A":
-      sortedItems = itemsToDisplay
-        .slice()
-        .sort((a, b) => b.title.localeCompare(a.title));
-      break;
-    case "Highest Price":
-      sortedItems = itemsToDisplay
-        .slice()
-        .sort(
-          (a, b) => parseFloat(b.value.slice(1)) - parseFloat(a.value.slice(1))
-        );
-      break;
-    case "Lowest Price":
-      sortedItems = itemsToDisplay
-        .slice()
-        .sort(
-          (a, b) => parseFloat(a.value.slice(1)) - parseFloat(b.value.slice(1))
-        );
-      break;
-    default:
-      sortedItems = itemsToDisplay;
-  }
+const OrderItemCards = ({ selectedCategoryId }) => {
+  const [items, setItems] = useState([]);
+  const [dropdownOpenSubcategory, setDropdownOpenSubcategory] = useState(false);
+  const [selectedSubcategoryOption, setSubcategoryOption] = useState("All");
+  const [dropdownOpenSort, setDropdownOpenSort] = useState(false);
+  const [sortBy, setSortBy] = useState("Default");
+  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
-    // Reset to "All" when the Category menu changes
+    const fetchOrderItems = async () => {
+      try {
+        const response = await fetch(
+          `http://34.123.7.14/api/categories/${selectedCategoryId}/products`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(
+            `HTTP error! Status: ${response.status} - ${response.statusText}`
+          );
+        }
+
+        const data = await response.json();
+        // Map API response to match the OrderItemCard expected fields
+        const mappedItems = data.map((item) => ({
+          title: item.name,
+          price: parseFloat(item.unit_price), // Convert price to number
+          stock: item.quantity,
+          image: item.image,
+        }));
+        setItems(mappedItems);
+      } catch (error) {
+        console.error("There was a problem with the fetch operation:", error);
+      }
+    };
+
+    fetchOrderItems();
+  }, [selectedCategoryId]); // Fetch products whenever selectedCategoryId changes
+
+  // Sorting function based on sortBy state
+  let sortedItems = [...items];
+  switch (sortBy) {
+    case "A-Z":
+      sortedItems.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+    case "Z-A":
+      sortedItems.sort((a, b) => b.title.localeCompare(a.title));
+      break;
+    case "Highest Price":
+      sortedItems.sort((a, b) => b.price - a.price);
+      break;
+    case "Lowest Price":
+      sortedItems.sort((a, b) => a.price - b.price);
+      break;
+    default:
+      break;
+  }
+
+  // Reset state when selectedCategoryId changes
+  useEffect(() => {
     setSubcategoryOption("All");
-    // Reset to "Default" when the Category menu changes
     setSortBy("Default");
-  }, [selectedMenu]);
+  }, [selectedCategoryId]);
 
   // Subcategory options
   const toggleDropdownSubcategory = () => {
     setDropdownOpenSubcategory(!dropdownOpenSubcategory);
+  };
+
+  const handleSubcategoryOptionClick = (option) => {
+    setSubcategoryOption(option);
+    setDropdownOpenSubcategory(false);
   };
 
   // Sorting options
@@ -127,17 +89,17 @@ const OrderItemCards = ({ selectedMenu }) => {
     setDropdownOpenSort(!dropdownOpenSort);
   };
 
-  const handleSubcategoryOptionClick = (option) => {
-    setSubcategoryOption(option);
-    // Close the subcategory dropdown when a subcategory option is clicked
-    setDropdownOpenSubcategory(false);
-  };
-
   const handleSortOptionClick = (option) => {
     setSortBy(option);
-    // Close the sorting dropdown when a sorting option is clicked
     setDropdownOpenSort(false);
   };
+
+  // Filtering items based on selectedSubcategoryOption
+  const filteredItems = sortedItems.filter(
+    (item) =>
+      selectedSubcategoryOption === "All" ||
+      item.title === selectedSubcategoryOption
+  );
 
   return (
     <section className="content-order-container">
@@ -149,18 +111,20 @@ const OrderItemCards = ({ selectedMenu }) => {
           </button>
           {dropdownOpenSubcategory && (
             <div className="dropdown-content">
-              {dropdownOptions.map((option, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  onClick={() => handleSubcategoryOptionClick(option)}
-                  className={
-                    selectedSubcategoryOption === option ? "selected" : ""
-                  }
-                >
-                  {option}
-                </a>
-              ))}
+              {["All", ...new Set(items.map((item) => item.title))].map(
+                (option, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    onClick={() => handleSubcategoryOptionClick(option)}
+                    className={
+                      selectedSubcategoryOption === option ? "selected" : ""
+                    }
+                  >
+                    {option}
+                  </a>
+                )
+              )}
             </div>
           )}
         </div>
@@ -171,63 +135,40 @@ const OrderItemCards = ({ selectedMenu }) => {
           </button>
           {dropdownOpenSort && (
             <div className="dropdown-content">
-              <a
-                href="#"
-                onClick={() => handleSortOptionClick("Default")}
-                className={sortBy === "Default" ? "selected" : ""}
-              >
-                Default
-              </a>
-              <a
-                href="#"
-                onClick={() => handleSortOptionClick("A-Z")}
-                className={sortBy === "A-Z" ? "selected" : ""}
-              >
-                A-Z
-              </a>
-              <a
-                href="#"
-                onClick={() => handleSortOptionClick("Z-A")}
-                className={sortBy === "Z-A" ? "selected" : ""}
-              >
-                Z-A
-              </a>
-              <a
-                href="#"
-                onClick={() => handleSortOptionClick("Highest Price")}
-                className={sortBy === "Highest Price" ? "selected" : ""}
-              >
-                Highest Price
-              </a>
-              <a
-                href="#"
-                onClick={() => handleSortOptionClick("Lowest Price")}
-                className={sortBy === "Lowest Price" ? "selected" : ""}
-              >
-                Lowest Price
-              </a>
+              {["Default", "A-Z", "Z-A", "Highest Price", "Lowest Price"].map(
+                (option, index) => (
+                  <a
+                    key={index}
+                    href="#"
+                    onClick={() => handleSortOptionClick(option)}
+                    className={sortBy === option ? "selected" : ""}
+                  >
+                    {option}
+                  </a>
+                )
+              )}
             </div>
           )}
         </div>
       </div>
 
       <div className="content-order-cards">
-        {sortedItems
-          .filter(
-            (item) =>
-              selectedSubcategoryOption === "All" ||
-              item.title === selectedSubcategoryOption
-          )
-          .map((item, index) => (
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item, index) => (
             <OrderItemCard key={index} cardInfo={item} />
-          ))}
+          ))
+        ) : (
+          <div className="no-products-message">No products available</div>
+        )}
       </div>
     </section>
   );
 };
 
 OrderItemCards.propTypes = {
-  selectedMenu: PropTypes.string.isRequired,
+  selectedCategoryId: PropTypes.number.isRequired,
 };
 
 export default OrderItemCards;
+
+////////////////////////////

@@ -29,10 +29,12 @@
 
   .order-top-r {
     width: 332px;
+    height: 40px;
 
     .search-input {
       width: 100%;
-      padding: 8px 12px;
+      height: 100%;
+      padding: 0 0 0 10px;
       font-size: 15px;
       border: 1px solid var(--base-text-color);
       border-radius: 5px;
