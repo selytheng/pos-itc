@@ -91,6 +91,8 @@ const ProductItemCard = ({ cardInfo }) => {
     if (response.ok) {
       // handle successful update (e.g., close dialog, show success message)
       setShowEditDialog(false);
+      console.log("update successfully");
+      window.location.href = "/products";
     } else {
       // handle error
       console.error("Failed to update product");
@@ -108,6 +110,7 @@ const ProductItemCard = ({ cardInfo }) => {
           Authorization: `Bearer ${accessToken}`,
         },
       });
+      console.log("delete sucessfully");
       window.location.href = "/products";
 
       if (response.ok) {
