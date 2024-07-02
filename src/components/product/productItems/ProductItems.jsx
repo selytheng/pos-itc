@@ -16,8 +16,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
     stock: "",
   });
   const fileInputRef = useRef(null);
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMzQuMTIzLjcuMTQvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk4NzUzMDksImV4cCI6MTcxOTg3ODkwOSwibmJmIjoxNzE5ODc1MzA5LCJqdGkiOiJNcWp0ejdPZHp2VGxlNmN2Iiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJlbWFpbCI6Imx5aGFiQGdtYWlsLmNvbSIsIm5hbWUiOiJMeWhhYiJ9.qyYkL844Y82I4d9HBJwqdoO0GfEcD9VAMSTH4oj266g";
+  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
     const fetchProducts = async () => {
