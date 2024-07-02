@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 import OrderItemCard from "./OrderItem";
 import "./OrderItems.scss";
 import PropTypes from "prop-types";
+import { FaAngleUp, FaAngleDown } from "react-icons/fa";
 
 const OrderItemCards = ({ selectedCategoryId }) => {
   const [items, setItems] = useState([]);
@@ -10,8 +10,7 @@ const OrderItemCards = ({ selectedCategoryId }) => {
   const [selectedSubcategoryOption, setSubcategoryOption] = useState("All");
   const [dropdownOpenSort, setDropdownOpenSort] = useState(false);
   const [sortBy, setSortBy] = useState("Default");
-  const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMzQuMTIzLjcuMTQvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk4ODg2NDIsImV4cCI6MTcxOTg5MjI0MiwibmJmIjoxNzE5ODg4NjQyLCJqdGkiOiJYUXBoRWoxb2hMY3FVeEVuIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJlbWFpbCI6Imx5aGFiQGdtYWlsLmNvbSIsIm5hbWUiOiJMeWhhYiJ9.H8nWif1axDV6hWNOJrGuZ93fhWCJMTCMua6v2kpIV74"; // Replace with actual token
+  const token = localStorage.getItem("access_token");
 
   useEffect(() => {
     const fetchOrderItems = async () => {
@@ -171,3 +170,5 @@ OrderItemCards.propTypes = {
 };
 
 export default OrderItemCards;
+
+////////////////////////////
