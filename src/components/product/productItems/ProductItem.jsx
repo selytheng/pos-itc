@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { MdEdit } from "react-icons/md";
 
 const ProductItemCard = ({ cardInfo }) => {
-  const { title, price, stock, image } = cardInfo;
+  const { name, price, stock, image } = cardInfo;
 
   return (
     <div className="product-card">
@@ -10,10 +10,10 @@ const ProductItemCard = ({ cardInfo }) => {
         <img
           className="product-info-image"
           src={`http://34.123.7.14/${image}`}
-          alt={title}
+          alt={name}
         />{" "}
         {/* Added base URL */}
-        <h5 className="product-info-title">{title}</h5>
+        <h5 className="product-info-title">{name}</h5>
         <div className="product-info-price-stock">
           <div className="product-info-price-container">
             <div className="product-info-price-prefix">$</div>
@@ -34,10 +34,10 @@ const ProductItemCard = ({ cardInfo }) => {
 
 ProductItemCard.propTypes = {
   cardInfo: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired, // Note: API returns price as a string
-    stock: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
+    name: PropTypes.string,
+    price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    stock: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    image: PropTypes.string,
   }).isRequired,
 };
 
