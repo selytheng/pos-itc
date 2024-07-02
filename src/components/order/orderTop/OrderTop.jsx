@@ -7,7 +7,7 @@ const OrderTop = () => {
   const { openSidebar } = useContext(SidebarContext);
 
   return (
-    <section className="content-order-top">
+    <div className="content-order-top">
       <div className="order-top-l">
         <button
           className="sidebar-open-btn"
@@ -21,7 +21,7 @@ const OrderTop = () => {
       <div className="order-top-r">
         <input type="text" placeholder="Search..." className="search-input" />
       </div>
-    </section>
+    </div>
   );
 };
 

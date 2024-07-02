@@ -6,7 +6,7 @@ const ProductPage = () => {
   const [categories, setCategories] = useState([]); // Add state for category name
   const [selectedCategoryId, setSelectedCategoryId] = useState(null); // Add state for category ID
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMzQuMTIzLjcuMTQvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk4NDQzNjYsImV4cCI6MTcxOTg0Nzk2NiwibmJmIjoxNzE5ODQ0MzY2LCJqdGkiOiJMWG03enhydDhMdmZxWnNSIiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJlbWFpbCI6Imx5aGFiQGdtYWlsLmNvbSIsIm5hbWUiOiJMeWhhYiJ9.Glq_PVOQNuP90DaC_OoBRfdhLMpdaplTgvxHFJkHEsY";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMzQuMTIzLjcuMTQvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MTk4NzUzMDksImV4cCI6MTcxOTg3ODkwOSwibmJmIjoxNzE5ODc1MzA5LCJqdGkiOiJNcWp0ejdPZHp2VGxlNmN2Iiwic3ViIjoiMyIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJlbWFpbCI6Imx5aGFiQGdtYWlsLmNvbSIsIm5hbWUiOiJMeWhhYiJ9.qyYkL844Y82I4d9HBJwqdoO0GfEcD9VAMSTH4oj266g";
 
   useEffect(() => {
     const fetchCategories = async () => {

@@ -12,7 +12,6 @@ const ProductItemCard = ({ cardInfo }) => {
           src={`http://34.123.7.14/${image}`}
           alt={title}
         />{" "}
-        {/* Added base URL */}
         <h5 className="product-info-title">{title}</h5>
         <div className="product-info-price-stock">
           <div className="product-info-price-container">
