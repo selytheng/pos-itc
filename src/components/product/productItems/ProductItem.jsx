@@ -12,7 +12,7 @@ const ProductItemCard = ({ cardInfo }) => {
           src={`http://34.123.7.14/${image}`}
           alt={name}
         />{" "}
-        <h5 className="product-info-title">{title}</h5>
+        <h5 className="product-info-title">{name}</h5>
         <div className="product-info-price-stock">
           <div className="product-info-price-container">
             <div className="product-info-price-prefix">$</div>

@@ -2,12 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import ProductItemCard from "./ProductItem";
 import "./ProductItems.scss";
 import PropTypes from "prop-types";
-import { MdAdd, MdCancel } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 
 const ProductItemCards = ({ selectedCategoryId }) => {
   const [items, setItems] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [isFadingOut, setIsFadingOut] = useState(false);
   const [newProduct, setNewProduct] = useState({
     name: "",
     category_id: "",
