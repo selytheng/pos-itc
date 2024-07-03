@@ -127,7 +127,11 @@ const ProductItemCards = ({ selectedCategoryId }) => {
       }
 
       const addedProduct = await response.json();
-      setItems([...items, addedProduct]);
+      setItems([
+        ...items,
+        { ...addedProduct, category_id: Number(addedProduct.category_id) },
+      ]);
+
       setShowForm(false);
       setNewProduct({
         name: "",
@@ -140,7 +144,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
         code: "",
       });
       console.log("Add Success");
-      window.location.href = "/products";
+      // window.location.href = "/products";
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
