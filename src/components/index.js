@@ -10,3 +10,7 @@ export { default as OrderPayment } from "./order/orderPayment/OrderPayment";
 export { default as ProductTop } from "./product/productTop/ProductTop";
 export { default as ProductMenu } from "./product/productMenu/ProductMenu";
 export { default as ProductItems } from "./product/productItems/ProductItems";
+export { default as SettingTop } from "./setting/settingTop/SettingTop";
+export { default as SettingMenu } from "./setting/settingMenu/SettingMenu";
+export { default as UserTop } from "./user/userTop/UserTop";
+export { default as UserMenu } from "./user/userMenu/UserMenu";

@@ -14,7 +14,7 @@ import {
   MdOutlineSettings,
   MdOutlineShoppingBag,
 } from "react-icons/md";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Sidebar.scss";
 import { SidebarContext } from "../../context/SidebarContext";
 
@@ -23,7 +23,7 @@ const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useContext(SidebarContext);
   const navbarRef = useRef(null);
   const location = useLocation(); // To get the current location (route)
-
+  const navigate = useNavigate(); // Hook for navigation
   const [activeLink, setActiveLink] = useState(""); // State to manage active link
 
   // Closing the navbar when clicked outside the sidebar area
@@ -53,6 +53,12 @@ const Sidebar = () => {
     setActiveLink(pathname);
   }, [location]);
 
+  // Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("access_token"); // Clear the token
+    navigate("/"); // Redirect to login page
+  };
+
   return (
     <nav
       className={`sidebar ${isSidebarOpen ? "sidebar-show" : ""}`}
@@ -72,8 +78,10 @@ const Sidebar = () => {
           <ul className="menu-list">
             <li className="menu-item">
               <Link
-                to="/"
-                className={`menu-link ${activeLink === "/" ? "active" : ""}`}
+                to="/dashboard"
+                className={`menu-link ${
+                  activeLink === "/dashboard" ? "active" : ""
+                }`}
               >
                 <span className="menu-link-icon">
                   <MdOutlineGridView size={18} />
@@ -148,9 +156,9 @@ const Sidebar = () => {
             </li>
             <li className="menu-item">
               <Link
-                to="/user"
+                to="/users"
                 className={`menu-link ${
-                  activeLink === "/user" ? "active" : ""
+                  activeLink === "/users" ? "active" : ""
                 }`}
               >
                 <span className="menu-link-icon">
@@ -178,17 +186,17 @@ const Sidebar = () => {
               </Link>
             </li>
             <li className="menu-item">
-              <Link
-                to="/logout"
+              <button
                 className={`menu-link ${
                   activeLink === "/logout" ? "active" : ""
                 }`}
+                onClick={handleLogout} // Add the handleLogout function
               >
                 <span className="menu-link-icon">
                   <MdOutlineLogout size={20} />
                 </span>
                 <span className="menu-link-text">Logout</span>
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
