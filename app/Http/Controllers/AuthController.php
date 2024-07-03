@@ -92,6 +92,79 @@ class AuthController extends Controller
         }
     }
 
+    public function update(Request $request, $id)
+    {
+        try {
+            $token = $request->bearerToken();
+            $user = Auth::guard('api')->user();
+            if (!$user) {
+                return response()->json([
+                    'message' => 'Unauthenticated',
+                    'token' => $token
+                ], Response::HTTP_UNAUTHORIZED);
+            }
+
+            $updateUserData = $request->validate([
+                'name'          => 'sometimes|required|string',
+                'email'         => 'sometimes|required|string|email|unique:users,email,' . $id,
+                'password'      => 'sometimes|required|min:8|confirmed',
+                'role_id'       => 'sometimes|required|integer'
+            ]);
+
+            $user = User::findOrFail($id);
+
+            if (isset($updateUserData['name'])) {
+                $user->name = $updateUserData['name'];
+            }
+            if (isset($updateUserData['email'])) {
+                $user->email = $updateUserData['email'];
+            }
+            if (isset($updateUserData['password'])) {
+                $user->password = Hash::make($updateUserData['password']);
+            }
+            if (isset($updateUserData['role_id'])) {
+                $user->role_id = $updateUserData['role_id'];
+            }
+
+            $user->updated_at = Carbon::now('Asia/Phnom_Penh');
+            $user->save();
+
+            return response()->json(['message' => 'User Updated'], Response::HTTP_OK);
+
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation Error',
+                'errors' => $e->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Server Error',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //delete user
+    public function delete($id){
+        try{
+            $deleteUser = User::find($id);
+            if (!$deleteUser){
+                return response()->json(['message'=> 'User not found.'], 404);
+            }
+            $deleteUser->delete();
+            
+            return response()->json(['message'=> 'User deleted.'], 200);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation Error',
+                'errors' => $e->errors(),
+            ], Response::HTTP_BAD_REQUEST);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Server Error',
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
     public function me()
     {
         // Here we just get information about current user

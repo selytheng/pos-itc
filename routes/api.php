@@ -18,6 +18,8 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api')->name('logout');
     Route::post('/refresh', [AuthController::class, 'refresh'])->middleware('auth:api')->name('refresh');
     Route::post('/me', [AuthController::class, 'me'])->middleware('auth:api')->name('me');
+    Route::patch('/{id}', [AuthController::class, 'update'])->middleware('auth:api')->name('update');
+    Route::delete('/{id}', [AuthController::class, 'delete'])->middleware('auth:api')->name('delete');
     Route::post('/allUser', [AuthController::class, 'allUser'])->middleware('auth:api')->name('allUser');
 });
 
