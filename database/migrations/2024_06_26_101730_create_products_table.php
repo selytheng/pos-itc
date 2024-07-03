@@ -22,7 +22,7 @@ return new class extends Migration
             $table->decimal('unit_price', 8, 2);
             $table->integer('quantity');
             $table->text('image')->nullable();
-            $table->integer('promotion');
+            $table->integer('promotion')->nullable();
             $table->integer('alert');
             $table->timestamps();
         });

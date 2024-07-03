@@ -22,7 +22,7 @@ class ProductController extends Controller
                 'unit_price'    => 'required|numeric|min:0|max:999999.99',
                 'quantity'      => 'required|integer',
                 'image'         => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-                'promotion'     => 'required|integer',
+                'promotion'     => 'integer',
                 'alert'         => 'required|integer',
             ]);
 

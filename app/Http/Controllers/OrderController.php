@@ -46,9 +46,12 @@ class OrderController extends Controller
                 $product->quantity -= $item['quantity'];
                 $product->save();
 
-                $unitPrice      =   $product->unit_price;
-                $quantity       =   $item['quantity'];
-                $totalPrice     +=  $unitPrice * $quantity;
+                $unitPrice          =   $product->unit_price;
+                $quantity           =   $item['quantity'];
+                $totalPrice        +=  $unitPrice * $quantity;
+                // $discountPercentage = $item['promotion'] ?? 0;
+                // $discountedPrice    = $product->getDiscountPrice($discountPercentage);
+                // $totalPrice        +=  $discountedPrice  * $quantity;
 
                 $orderDetails[] = [
                     'product_code'  => $item['product_code'],
@@ -132,14 +135,14 @@ class OrderController extends Controller
     {
         try {
             $telegramToken = '7305996766:AAEYw9Nz8RXN1yEFGIPrw2aNze0dTpuDIy8';
-            $chatId = '-4200088563';
+            $chatId = '-1002109246239';
 
             $client = new Client();
 
             // Compose message text
             // $message = "*New Order Received*\n\n";
             // $message = "=====================\n\n";
-            $message = "🔢 Receipt Number: " . $order->receipt_number . "\n\n";
+            $message =  "🔢 Receipt Number: " . $order->receipt_number . "\n\n";
             $message .= "👩‍💻 Cashier: " . $order->cashier->name . "\n\n";
             $message .= "📅 Order at: " . $order->created_at->format('Y-m-d H:i:s') . "\n\n";
             $message .= "=====================\n\n";
