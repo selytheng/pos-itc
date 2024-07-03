@@ -43,6 +43,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
 
         const data = await response.json();
         const mappedItems = data.map((item) => ({
+          id: item.id,
           name: item.name,
           price: item.unit_price,
           stock: item.quantity,
@@ -139,6 +140,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
         code: "",
       });
       console.log("Add Success");
+      window.location.href = "/products";
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
