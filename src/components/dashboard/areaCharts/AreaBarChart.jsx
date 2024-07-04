@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -13,56 +13,93 @@ import { FaArrowUpLong } from "react-icons/fa6";
 import { LIGHT_THEME } from "../../../constants/themeConstants";
 import "./AreaCharts.scss";
 
-const data = [
-  {
-    month: "Jan",
-    loss: 70,
-    profit: 100,
-  },
-  {
-    month: "Feb",
-    loss: 55,
-    profit: 85,
-  },
-  {
-    month: "Mar",
-    loss: 35,
-    profit: 90,
-  },
-  {
-    month: "April",
-    loss: 90,
-    profit: 70,
-  },
-  {
-    month: "May",
-    loss: 55,
-    profit: 80,
-  },
-  {
-    month: "Jun",
-    loss: 30,
-    profit: 50,
-  },
-  {
-    month: "Jul",
-    loss: 32,
-    profit: 75,
-  },
-  {
-    month: "Aug",
-    loss: 62,
-    profit: 86,
-  },
-  {
-    month: "Sep",
-    loss: 55,
-    profit: 78,
-  },
-];
-
 const AreaBarChart = () => {
   const { theme } = useContext(ThemeContext);
+  const [data, setData] = useState([]);
+  const [totalRevenue, setTotalRevenue] = useState(0);
+  const [percentageChange, setPercentageChange] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://34.123.7.14/api/getAllOrders", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const result = await response.json();
+        const orders = result.orders;
+
+        // Get current year
+        const currentYear = new Date().getFullYear();
+
+        // Calculate monthly revenue
+        const monthlyRevenue = orders.reduce((acc, order) => {
+          const date = new Date(order.created_at);
+          const year = date.getFullYear();
+
+          if (year === currentYear) {
+            const month = date.toLocaleString("default", { month: "short" });
+            const existingMonth = acc.find((item) => item.month === month);
+
+            if (existingMonth) {
+              existingMonth.revenue += order.total_price;
+            } else {
+              acc.push({ month, revenue: order.total_price });
+            }
+          }
+
+          return acc;
+        }, []);
+
+        // Sort months according to your requirement
+        const sortedData = [
+          { month: "Jan", revenue: 0 },
+          { month: "Feb", revenue: 0 },
+          { month: "Mar", revenue: 0 },
+          { month: "Apr", revenue: 0 },
+          { month: "May", revenue: 0 },
+          { month: "Jun", revenue: 0 },
+          { month: "Jul", revenue: 0 },
+          { month: "Aug", revenue: 0 },
+          { month: "Sep", revenue: 0 },
+          { month: "Oct", revenue: 0 },
+          { month: "Nov", revenue: 0 },
+          { month: "Dec", revenue: 0 },
+        ].map((monthData) => ({
+          ...monthData,
+          revenue:
+            (monthlyRevenue.find((item) => item.month === monthData.month)
+              ?.revenue || 0) / 1000,
+        }));
+
+        setData(sortedData);
+
+        // Calculate total revenue and percentage change
+        const totalRevenue = sortedData.reduce(
+          (acc, item) => acc + item.revenue,
+          0
+        );
+        const lastMonthRevenue =
+          sortedData[sortedData.length - 2]?.revenue || 0;
+        const percentageChange = lastMonthRevenue
+          ? ((totalRevenue - lastMonthRevenue) / lastMonthRevenue) * 100
+          : 0;
+
+        setTotalRevenue(totalRevenue);
+        setPercentageChange(percentageChange);
+      } catch (error) {
+        console.error("Error fetching data", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const formatTooltipValue = (value) => {
     return `${value}k`;
@@ -81,10 +118,10 @@ const AreaBarChart = () => {
       <div className="bar-chart-info">
         <h5 className="bar-chart-title">Total Revenue</h5>
         <div className="chart-info-data">
-          <div className="info-data-value">$50.4K</div>
+          <div className="info-data-value">${totalRevenue.toFixed(1)}K</div>
           <div className="info-data-text">
             <FaArrowUpLong />
-            <p>5% than last month.</p>
+            <p>{percentageChange.toFixed(2)}% than last month.</p>
           </div>
         </div>
       </div>
@@ -133,16 +170,8 @@ const AreaBarChart = () => {
               formatter={formatLegendValue}
             />
             <Bar
-              dataKey="profit"
+              dataKey="revenue"
               fill="#475be8"
-              activeBar={false}
-              isAnimationActive={false}
-              barSize={24}
-              radius={[4, 4, 4, 4]}
-            />
-            <Bar
-              dataKey="loss"
-              fill="#e3e7fc"
               activeBar={false}
               isAnimationActive={false}
               barSize={24}
