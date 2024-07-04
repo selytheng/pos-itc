@@ -94,53 +94,28 @@ class AuthController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
-            $token = $request->bearerToken();
-            $user = Auth::guard('api')->user();
-            if (!$user) {
-                return response()->json([
-                    'message' => 'Unauthenticated',
-                    'token' => $token
-                ], Response::HTTP_UNAUTHORIZED);
-            }
+        $user = User::findOrFail($id);
 
-            $updateUserData = $request->validate([
-                'name'          => 'sometimes|required|string',
-                'email'         => 'sometimes|required|string|email|unique:users,email,' . $id,
-                'password'      => 'sometimes|required|min:8|confirmed',
-                'role_id'       => 'sometimes|required|integer'
-            ]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:users,email,' . $user->id,
+            'phone_number' => 'nullable|string|max:15|unique:users,phone_number,' . $user->id,
+            'password' => 'nullable|string|min:6|confirmed',
+            'role_id' => 'exists:roles,id',
+        ]);
 
-            $user = User::findOrFail($id);
-
-            if (isset($updateUserData['name'])) {
-                $user->name = $updateUserData['name'];
-            }
-            if (isset($updateUserData['email'])) {
-                $user->email = $updateUserData['email'];
-            }
-            if (isset($updateUserData['password'])) {
-                $user->password = Hash::make($updateUserData['password']);
-            }
-            if (isset($updateUserData['role_id'])) {
-                $user->role_id = $updateUserData['role_id'];
-            }
-
-            $user->updated_at = Carbon::now('Asia/Phnom_Penh');
-            $user->save();
-
-            return response()->json(['message' => 'User Updated'], Response::HTTP_OK);
-
-        } catch (ValidationException $e) {
-            return response()->json([
-                'message' => 'Validation Error',
-                'errors' => $e->errors(),
-            ], Response::HTTP_BAD_REQUEST);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Server Error',
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
         }
+
+        $user->update($request->only(['name', 'email', 'phone_number', 'role_id']));
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+            $user->save();
+        }
+
+        return response()->json($user);
     }
 
     //delete user
