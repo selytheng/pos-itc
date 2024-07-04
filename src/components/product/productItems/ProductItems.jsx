@@ -25,7 +25,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `https://api.gic-itc.top/api/categories/${selectedCategoryId}/products`,
+          `http://34.123.7.14/api/categories/${selectedCategoryId}/products`,
           {
             method: "GET",
             headers: {
@@ -57,7 +57,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
 
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`https://api.gic-itc.top/api/categories`, {
+        const response = await fetch(`http://34.123.7.14/api/categories`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
     formData.append("code", newProduct.code);
 
     try {
-      const response = await fetch(`https://api.gic-itc.top/api/products`, {
+      const response = await fetch(`http://34.123.7.14/api/products`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

@@ -8,10 +8,11 @@ import {
   OrderPage,
   SettingPage,
   UserPage,
+  PaymentPage,
 } from "./screens";
 import LoginPage from "./pages/login/LoginPage";
 import SignUp from "./pages/register/RegisterPage";
-import PaymentPage from "./pages/payment/PaymentPage";
+// import PaymentPage from "./pages/payment/PaymentPage";
 import StatisticsPage from "./pages/statistics/StatisticsPage";
 
 function App() {
@@ -23,11 +24,11 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route element={<BaseLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/payment" element={<PaymentPage />} />
             <Route path="/statistics" element={<StatisticsPage />} />
-            <Route path="/users" element={<UserPage />} />
             <Route path="/orders" element={<OrderPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
             <Route path="/products" element={<ProductPage />} />
+            <Route path="/users" element={<UserPage />} />
             <Route path="/settings" element={<SettingPage />} />
             <Route path="*" element={<PageNotFound />} />
           </Route>

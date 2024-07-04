@@ -14,3 +14,5 @@ export { default as SettingTop } from "./setting/settingTop/SettingTop";
 export { default as SettingMenu } from "./setting/settingMenu/SettingMenu";
 export { default as UserTop } from "./user/userTop/UserTop";
 export { default as UserMenu } from "./user/userMenu/UserMenu";
+export { default as PaymentTop } from "./payment/paymentTop/PaymentTop";
+export { default as PaymentBody } from "./payment/paymentBody/PaymentBody";

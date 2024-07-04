@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import "./UserMenu.scss";
 import UserBody from "../userBody/UserBody";
 
-const UserMenu = ({ onSelectMenu }) => {
-  const [currentRole, setCurrentRole] = useState("admin");
+const UserMenu = ({ onSelectRole, selectedRole }) => {
+  const [currentRole, setCurrentRole] = useState(selectedRole);
   const [indicatorPosition, setIndicatorPosition] = useState({
     left: 0,
     width: 0,
   });
   const indicatorRef = useRef(null);
+
+  useEffect(() => {
+    // Update the current role when selectedRole changes
+    setCurrentRole(selectedRole);
+  }, [selectedRole]);
 
   useEffect(() => {
     const activeItem = indicatorRef.current;
@@ -24,7 +29,7 @@ const UserMenu = ({ onSelectMenu }) => {
 
   const handleClick = (role) => {
     setCurrentRole(role);
-    onSelectMenu(role); // Pass the selected setting to the parent component if needed
+    onSelectRole(role); // Pass the selected role to the parent component
   };
 
   return (
@@ -64,7 +69,8 @@ const UserMenu = ({ onSelectMenu }) => {
 };
 
 UserMenu.propTypes = {
-  onSelectMenu: PropTypes.func,
+  onSelectRole: PropTypes.func.isRequired,
+  selectedRole: PropTypes.string.isRequired,
 };
 
 export default UserMenu;

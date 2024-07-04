@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext } from "react";
+import { useState, useMemo, useContext, useEffect } from "react";
 import "./OrderPayment.scss";
 import { FaTrash, FaTimes, FaMoneyCheckAlt } from "react-icons/fa";
 import { PaymentContext } from "../../../context/PaymentContext";
@@ -11,13 +11,44 @@ const OrderPayment = () => {
     items,
     removeItemFromOrder,
     updateItemQuantity,
-    clearCart, // Destructure clearCart from the context
+    clearCart,
   } = useContext(PaymentContext);
   const [activeOption, setActiveOption] = useState("Dine In");
   const [orderNumber, setOrderNumber] = useState(1);
   const [editableQty, setEditableQty] = useState({});
   const [initialQty, setInitialQty] = useState({});
   const token = localStorage.getItem("access_token");
+
+  // Fetch the latest order ID and set the initial order number
+  const fetchLatestOrderId = async () => {
+    try {
+      const response = await fetch("http://34.123.7.14/api/getAllOrders", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const latestOrderId = data.orders.reduce(
+          (maxId, order) => (order.id > maxId ? order.id : maxId),
+          0
+        );
+        setOrderNumber(latestOrderId + 1); // Increment the order number
+      } else {
+        console.error("Failed to fetch orders:", await response.text());
+      }
+    } catch (error) {
+      console.error("Error fetching orders:", error);
+    }
+  };
+
+  // Call fetchLatestOrderId when the component mounts
+  useEffect(() => {
+    fetchLatestOrderId();
+  }, []);
 
   // Order payment option
   const handleButtonOrderPaymentOptionClick = (option) => {
@@ -90,6 +121,7 @@ const OrderPayment = () => {
         console.log("Order created:", data);
         setOrderNumber((prevOrderNumber) => prevOrderNumber + 1); // Increment the order number for the next order
         clearCart(); // Clear the cart after successfully creating an order
+        window.location.reload();
       } else {
         console.error("Failed to create order:", await response.text());
       }

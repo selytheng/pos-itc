@@ -2,16 +2,22 @@ import { UserTop, UserMenu } from "../../components";
 import { useState } from "react";
 
 const UserPage = () => {
-  const [selectedMenu, setSelectedMenu] = useState("admin");
+  // Retrieve the selected role from localStorage, default to "admin"
+  const [selectedRole, setSelectedRole] = useState(() => {
+    const savedRole = localStorage.getItem("selectedRole");
+    return savedRole ? savedRole : "admin";
+  });
 
-  const handleSelectMenu = (menu) => {
-    setSelectedMenu(menu);
+  const handleSelectRole = (role) => {
+    setSelectedRole(role);
+    // Save the selected role to localStorage
+    localStorage.setItem("selectedRole", role);
   };
 
   return (
     <div className="content-area">
       <UserTop />
-      <UserMenu onSelectMenu={handleSelectMenu} selectedMenu={selectedMenu} />
+      <UserMenu onSelectRole={handleSelectRole} selectedRole={selectedRole} />
     </div>
   );
 };

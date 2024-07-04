@@ -20,9 +20,18 @@ const OrderItemCard = ({ cardInfo, onAdd }) => {
           <p className="order-info-stock">{stock}</p>
           <div>stocks</div>
         </div>
-        <button className="order-info-add" onClick={() => onAdd(cardInfo)}>
-          ADD
-        </button>
+        {stock > 0 ? (
+          <button
+            className="order-info-add-out-of-stock"
+            onClick={() => onAdd(cardInfo)}
+          >
+            ADD
+          </button>
+        ) : (
+          <button className="order-info-add-out-of-stock" disabled>
+            Out of Stock
+          </button>
+        )}
       </div>
     </div>
   );
@@ -34,6 +43,7 @@ OrderItemCard.propTypes = {
     price: PropTypes.number.isRequired,
     stock: PropTypes.number.isRequired,
     image: PropTypes.string.isRequired,
+    code: PropTypes.string.isRequired, // Add 'code' to PropTypes
   }).isRequired,
   onAdd: PropTypes.func.isRequired,
 };

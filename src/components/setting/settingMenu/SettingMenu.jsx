@@ -3,13 +3,18 @@ import PropTypes from "prop-types";
 import "./SettingMenu.scss";
 import SettingBody from "../settingBody/SettingBody";
 
-const SettingMenu = ({ onSelectMenu }) => {
-  const [currentSetting, setCurrentSetting] = useState("general");
+const SettingMenu = ({ onSelectMenu, selectedMenu }) => {
+  const [currentSetting, setCurrentSetting] = useState(selectedMenu);
   const [indicatorPosition, setIndicatorPosition] = useState({
     left: 0,
     width: 0,
   });
   const indicatorRef = useRef(null);
+
+  useEffect(() => {
+    // Update the current setting when selectedMenu changes
+    setCurrentSetting(selectedMenu);
+  }, [selectedMenu]);
 
   useEffect(() => {
     const activeItem = indicatorRef.current;
@@ -24,7 +29,7 @@ const SettingMenu = ({ onSelectMenu }) => {
 
   const handleClick = (setting) => {
     setCurrentSetting(setting);
-    onSelectMenu(setting); // Pass the selected setting to the parent component if needed
+    onSelectMenu(setting); // Pass the selected setting to the parent component
   };
 
   return (
@@ -95,7 +100,8 @@ const SettingMenu = ({ onSelectMenu }) => {
 };
 
 SettingMenu.propTypes = {
-  onSelectMenu: PropTypes.func,
+  onSelectMenu: PropTypes.func.isRequired,
+  selectedMenu: PropTypes.string.isRequired,
 };
 
 export default SettingMenu;
