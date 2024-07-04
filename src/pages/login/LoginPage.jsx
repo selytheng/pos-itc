@@ -20,8 +20,21 @@ const LoginPage = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        // Successful login, store token in local storage
+        // Successful login, store token and user details in local storage
         localStorage.setItem("access_token", data.access_token);
+
+        // Fetch user details
+        const userResponse = await fetch("http://34.123.7.14/api/auth/me", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${data.access_token}`,
+          },
+        });
+        const userData = await userResponse.json();
+
+        // Store user details
+        localStorage.setItem("user", JSON.stringify(userData));
+
         // Redirect to dashboard or handle login success
         console.log("Login successful");
         window.location.href = "/dashboard";

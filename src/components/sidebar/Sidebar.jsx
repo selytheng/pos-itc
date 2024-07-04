@@ -26,6 +26,10 @@ const Sidebar = () => {
   const navigate = useNavigate(); // Hook for navigation
   const [activeLink, setActiveLink] = useState(""); // State to manage active link
 
+  // Get user details from localStorage
+  const user = JSON.parse(localStorage.getItem("user"));
+  const role_id = user ? user.role_id : null;
+
   // Closing the navbar when clicked outside the sidebar area
   const handleClickOutside = (event) => {
     if (
@@ -56,6 +60,7 @@ const Sidebar = () => {
   // Handle logout
   const handleLogout = () => {
     localStorage.removeItem("access_token"); // Clear the token
+    localStorage.removeItem("user"); // Clear the user details
     navigate("/"); // Redirect to login page
   };
 
@@ -128,32 +133,36 @@ const Sidebar = () => {
                 <span className="menu-link-text">Payment</span>
               </Link>
             </li>
-            <li className="menu-item">
-              <Link
-                to="/products"
-                className={`menu-link ${
-                  activeLink === "/products" ? "active" : ""
-                }`}
-              >
-                <span className="menu-link-icon">
-                  <MdOutlineShoppingBag size={20} />
-                </span>
-                <span className="menu-link-text">Products</span>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link
-                to="/users"
-                className={`menu-link ${
-                  activeLink === "/users" ? "active" : ""
-                }`}
-              >
-                <span className="menu-link-icon">
-                  <MdOutlinePeople size={20} />
-                </span>
-                <span className="menu-link-text">Users</span>
-              </Link>
-            </li>
+            {role_id === 1 && ( // Only show if the user is admin (role_id = 1)
+              <>
+                <li className="menu-item">
+                  <Link
+                    to="/products"
+                    className={`menu-link ${
+                      activeLink === "/products" ? "active" : ""
+                    }`}
+                  >
+                    <span className="menu-link-icon">
+                      <MdOutlineShoppingBag size={20} />
+                    </span>
+                    <span className="menu-link-text">Products</span>
+                  </Link>
+                </li>
+                <li className="menu-item">
+                  <Link
+                    to="/users"
+                    className={`menu-link ${
+                      activeLink === "/users" ? "active" : ""
+                    }`}
+                  >
+                    <span className="menu-link-icon">
+                      <MdOutlinePeople size={20} />
+                    </span>
+                    <span className="menu-link-text">Users</span>
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
 
