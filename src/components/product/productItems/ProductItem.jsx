@@ -22,7 +22,7 @@ const ProductItemCard = ({ cardInfo }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://34.123.7.14/api/categories", {
+        const response = await fetch("https://api.gic-itc.top/api/categories", {
           headers: {
             Authorization: `Bearer ${accessToken}`,
           },
@@ -88,7 +88,7 @@ const ProductItemCard = ({ cardInfo }) => {
     formData.append("code", editedProduct.code);
     formData.append("_method", "PATCH");
 
-    const response = await fetch(`http://34.123.7.14/api/products/${id}`, {
+    const response = await fetch(`https://api.gic-itc.top/api/products/${id}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -112,12 +112,15 @@ const ProductItemCard = ({ cardInfo }) => {
       "Are you sure you want to delete this product?"
     );
     if (confirmDelete) {
-      const response = await fetch(`http://34.123.7.14/api/products/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://api.gic-itc.top/api/products/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       console.log("delete sucessfully");
       window.location.href = "/products";
 
@@ -135,7 +138,7 @@ const ProductItemCard = ({ cardInfo }) => {
       <div className="product-card-info">
         <img
           className="product-info-image"
-          src={imagePreview || `http://34.123.7.14/${initialImage}`}
+          src={imagePreview || `https://api.gic-itc.top/${initialImage}`}
           alt={name}
         />
         <h5 className="product-info-title">{name}</h5>

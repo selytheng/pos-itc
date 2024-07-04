@@ -19,7 +19,7 @@ const UserBody = ({ currentRole }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://34.123.7.14/api/auth/allUser", {
+      const response = await fetch("https://api.gic-itc.top/api/auth/allUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,13 +63,16 @@ const UserBody = ({ currentRole }) => {
 
   const handleDelete = async (userId) => {
     try {
-      const response = await fetch(`http://34.123.7.14/api/auth/${userId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://api.gic-itc.top/api/auth/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         // Fetch users again after successful deletion
@@ -102,7 +105,7 @@ const UserBody = ({ currentRole }) => {
     if (editUser) {
       try {
         const response = await fetch(
-          `http://34.123.7.14/api/auth/${editUser.id}`, // Use the correct URL format
+          `https://api.gic-itc.top/api/auth/${editUser.id}`, // Use the correct URL format
           {
             method: "PUT", // PUT method for updating the user
             headers: {
@@ -132,14 +135,17 @@ const UserBody = ({ currentRole }) => {
       }
     } else {
       try {
-        const response = await fetch("http://34.123.7.14/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(newUser),
-        });
+        const response = await fetch(
+          "https://api.gic-itc.top/api/auth/register",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(newUser),
+          }
+        );
 
         if (response.ok) {
           await response.json();

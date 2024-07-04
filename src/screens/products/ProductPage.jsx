@@ -10,7 +10,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://34.123.7.14/api/categories", {
+        const response = await fetch("https://api.gic-itc.top/api/categories", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

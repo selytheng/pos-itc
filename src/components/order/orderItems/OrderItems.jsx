@@ -198,7 +198,7 @@ const OrderItemCards = ({ selectedCategoryId }) => {
     const fetchOrderItems = async () => {
       try {
         const response = await fetch(
-          `http://34.123.7.14/api/categories/${selectedCategoryId}/products`,
+          `https://api.gic-itc.top/api/categories/${selectedCategoryId}/products`,
           {
             method: "GET",
             headers: {
