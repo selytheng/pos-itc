@@ -11,7 +11,7 @@ import {
 import { ThemeContext } from "../../../context/ThemeContext";
 import { FaArrowUpLong } from "react-icons/fa6";
 import { LIGHT_THEME } from "../../../constants/themeConstants";
-import "./AreaCharts.scss";
+import "./AreaBarCharts.scss";
 
 const AreaBarChart = () => {
   const { theme } = useContext(ThemeContext);
@@ -171,7 +171,7 @@ const AreaBarChart = () => {
             />
             <Bar
               dataKey="revenue"
-              fill="#475be8"
+              fill="#ffcc3e"
               activeBar={false}
               isAnimationActive={false}
               barSize={24}

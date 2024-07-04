@@ -85,10 +85,10 @@ const AreaCards = () => {
   return (
     <section className="content-area-cards">
       <AreaCard
-        colors={["#e4e8ef", "#475be8"]}
+        colors={["#e4e8ef", "#ffcc3e"]}
         percentFillValue={80}
         cardInfo={{
-          title: "Todays Sales",
+          title: "Total Sales",
           value: `$${(todaysSales / 1000).toFixed(1)}K`,
           text: `Total ordered: ${totalOrdered} items.`,
         }}
@@ -102,15 +102,6 @@ const AreaCards = () => {
           text: "Available to payout",
         }}
       />
-      {/* <AreaCard
-        colors={["#e4e8ef", "#f29a2e"]}
-        percentFillValue={40}
-        cardInfo={{
-          title: "In Escrow",
-          value: "$18.2K",
-          text: "Available to payout",
-        }}
-      /> */}
     </section>
   );
 };

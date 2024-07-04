@@ -1,7 +1,7 @@
 export { default as Sidebar } from "./sidebar/Sidebar";
 export { default as AreaCards } from "./dashboard/areaCards/AreaCards";
-export { default as AreaCharts } from "./dashboard/areaCharts/AreaCharts";
-export { default as AreaTable } from "./dashboard/areaTable/AreaTable";
+export { default as AreaBarCharts } from "./dashboard/areaBarChart/AreaBarCharts";
+export { default as AreaProgressCharts } from "./dashboard/areaProgressChart/AreaProgressCharts";
 export { default as AreaTop } from "./dashboard/areaTop/AreaTop";
 export { default as OrderTop } from "./order/orderTop/OrderTop";
 export { default as OrderMenu } from "./order/orderMenu/OrderMenu";
