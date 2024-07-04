@@ -313,7 +313,7 @@ const OrdersList = () => {
           </div>
         </>
       ) : (
-        <>
+        <div className="order-list-container">
           <h1 className="order-list-title">Order List</h1>
           <div className="order-list-table">
             <table>
@@ -345,7 +345,7 @@ const OrdersList = () => {
               </tbody>
             </table>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

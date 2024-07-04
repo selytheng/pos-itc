@@ -67,14 +67,7 @@ const SettingMenu = ({ onSelectMenu, selectedMenu }) => {
         >
           Sound
         </h2>
-        <h2
-          className={`setting-menu-option ${
-            currentSetting === "history" ? "selected" : ""
-          }`}
-          onClick={() => handleClick("history")}
-        >
-          History
-        </h2>
+
         <h2
           className={`setting-menu-option ${
             currentSetting === "notification" ? "selected" : ""
