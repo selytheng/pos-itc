@@ -353,24 +353,6 @@
           }
         }
       }
-
-      // .product-info-edit {
-      //   width: 108%;
-      //   height: 16%;
-      //   position: relative;
-      //   bottom: -11px;
-
-      //   display: flex;
-      //   justify-content: center;
-      //   align-items: center;
-      //   gap: 10px;
-
-      //   font-size: 20px;
-
-      //   background-color: var(--primary-color);
-      //   color: var(--text-color-inverted);
-      //   border-radius: 0 0 20px 20px;
-      // }
     }
   }
 
@@ -406,7 +388,7 @@
 .add-new-product-function {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  align-items: center;
 }
 
 .add-new-product-container {

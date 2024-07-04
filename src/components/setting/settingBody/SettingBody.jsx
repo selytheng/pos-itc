@@ -152,14 +152,12 @@ const SettingBody = ({ currentSetting }) => {
           </div>
         </div>
       )}
-      {currentSetting === "history" && (
-        <div className="display-settings">
-          <p>Order history.</p>
-        </div>
-      )}
       {currentSetting === "notification" && (
         <div className="display-settings">
-          <p>Notifications.</p>
+          <div className="setting">
+            <div className="setting-function">Notification</div>
+            <ToggleButton isOn={!isOn} onToggle={handleToggle} />
+          </div>
         </div>
       )}
     </div>
