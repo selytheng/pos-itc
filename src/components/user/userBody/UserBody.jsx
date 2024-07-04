@@ -17,27 +17,27 @@ const UserBody = ({ currentRole }) => {
   const [editUser, setEditUser] = useState(null); // State for editing a user
   const token = localStorage.getItem("access_token");
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch("http://34.123.7.14/api/auth/allUser", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setUsers(data);
-        } else {
-          console.error("Failed to fetch users:", data.message);
-        }
-      } catch (error) {
-        console.error("Error fetching users:", error);
+  const fetchUsers = async () => {
+    try {
+      const response = await fetch("http://34.123.7.14/api/auth/allUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setUsers(data);
+      } else {
+        console.error("Failed to fetch users:", data.message);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchUsers();
   }, [currentRole, token]);
 
@@ -61,9 +61,25 @@ const UserBody = ({ currentRole }) => {
     setEditUser(user);
   };
 
-  const handleDelete = (userId) => {
-    console.log(`Delete user with ID ${userId}`);
-    // Implement delete functionality here
+  const handleDelete = async (userId) => {
+    try {
+      const response = await fetch(`http://34.123.7.14/api/auth/${userId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        // Fetch users again after successful deletion
+        fetchUsers();
+      } else {
+        console.error("Failed to delete user:", await response.json());
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -98,11 +114,11 @@ const UserBody = ({ currentRole }) => {
         );
 
         if (response.ok) {
-          const data = await response.json();
-          setUsers((prevUsers) =>
-            prevUsers.map((user) => (user.id === data.id ? data : user))
-          );
+          await response.json();
+          // Fetch users again after successful update
+          fetchUsers();
           setEditUser(null);
+          setDropdownVisible(null); // Close the dropdown after saving changes
         } else {
           console.error("Failed to update user:", await response.json());
         }
@@ -121,8 +137,9 @@ const UserBody = ({ currentRole }) => {
         });
 
         if (response.ok) {
-          const data = await response.json();
-          setUsers((prevUsers) => [data, ...prevUsers]);
+          await response.json();
+          // Fetch users again after successful addition
+          fetchUsers();
           setNewUser({
             name: "",
             email: "",
@@ -241,7 +258,6 @@ const UserBody = ({ currentRole }) => {
                           placeholder="New Password"
                           value={editUser.password}
                           onChange={handleInputChange}
-                          required
                         />
                         <input
                           type="password"
@@ -249,7 +265,6 @@ const UserBody = ({ currentRole }) => {
                           placeholder="Confirm Password"
                           value={editUser.c_password}
                           onChange={handleInputChange}
-                          required
                         />
                         <select
                           name="role_id"

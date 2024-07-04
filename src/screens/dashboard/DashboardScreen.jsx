@@ -4,8 +4,10 @@ const Dashboard = () => {
   return (
     <div className="content-area">
       <AreaTop />
-      <AreaCards />
-      <AreaCharts />
+      <div>
+        <AreaCards />
+        <AreaCharts />
+      </div>
     </div>
   );
 };

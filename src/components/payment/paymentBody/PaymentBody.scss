@@ -9,39 +9,66 @@
     color: var(--text-color-inverted);
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 1rem 0;
-    background-color: var(--bg-color-inverted);
-    color: var(--text-color-inverted);
+  .order-list-table {
+    table {
+      width: 100%;
+      height: 550px;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      background-color: var(--bg-color-inverted);
+      color: var(--text-color-inverted);
+      position: relative;
 
-    thead {
-      th {
+      thead {
+        display: table;
+        width: 100%;
+        background-color: var(--primary-color);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      thead th {
         height: 50px;
         padding: 0.75rem;
         text-align: center;
-        background-color: var(--primary-color);
+        border-bottom: 1px solid #ddd;
+        width: 16.66%;
       }
-    }
 
-    tbody {
+      tbody {
+        display: block;
+        height: calc(100% - 50px);
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      tbody::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+      }
+
+      tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+      }
+
       .order-list-tr {
         cursor: pointer;
         height: 60px;
-
-        &:hover {
-          cursor: pointer;
-          background-color: rgb(168, 168, 168);
-        }
       }
-      tr {
-        height: 60px;
-        td {
-          padding: 0.75rem;
-          border-bottom: 1px solid #ddd;
-          text-align: center;
-        }
+
+      .order-list-tr:hover {
+        background-color: rgb(168, 168, 168);
+      }
+
+      td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+        width: 16.66%;
       }
     }
   }
@@ -83,38 +110,89 @@
 
           h2 {
             padding-top: 20px;
+            padding-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color-inverted);
+          }
+
+          table {
+            width: 100%;
+            height: 500px;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background-color: var(--bg-color-inverted);
+            color: var(--text-color-inverted);
+            position: relative;
+
+            thead {
+              display: table;
+              width: 100%;
+              background-color: var(--primary-color);
+              color: #fff;
+              position: sticky;
+              top: 0;
+              z-index: 1;
+            }
+
+            thead th {
+              height: 50px;
+              padding: 0.75rem;
+              text-align: center;
+              border-bottom: 1px solid #ddd;
+              width: 16.66%;
+            }
+
+            tbody {
+              display: block;
+              height: calc(100% - 50px);
+              overflow-y: auto;
+              overflow-x: hidden;
+            }
+
+            tbody::-webkit-scrollbar {
+              width: 0px;
+              background: transparent;
+            }
+
+            tbody tr {
+              display: table;
+              width: 100%;
+              table-layout: fixed;
+            }
+
+            .order-list-tr {
+              cursor: pointer;
+              height: 60px;
+            }
+
+            .order-list-tr:hover {
+              background-color: rgb(168, 168, 168);
+            }
+
+            td {
+              padding: 0.75rem;
+              border-bottom: 1px solid #ddd;
+              text-align: center;
+              width: 16.66%;
+            }
           }
         }
 
-        .order-details table {
-          width: 100%;
-          border-collapse: collapse;
-        }
-
-        .order-details th,
-        .order-details td {
-          padding: 0.75rem;
-          border: 1px solid #ddd;
-        }
-
-        .order-details th {
-          background-color: var(--primary-color);
-          color: var(--text-color-inverted);
-        }
-
-        .order-details td {
-          text-align: center;
-          color: var(--text-color-inverted);
-        }
-
         .delete-button {
-          color: var(--red-color);
+          color: red;
+          cursor: pointer;
+          font-size: 1.2rem;
+          &:hover {
+            color: #b22222;
+          }
         }
 
         .cancel-order-button-container {
           display: flex;
           justify-content: center;
           align-items: center;
+          margin-top: 1rem;
 
           .cancel-order-button {
             font-size: 16px;
@@ -123,6 +201,17 @@
             background-color: var(--primary-color);
             color: var(--text-color-inverted);
             border-radius: 15px;
+            border: none;
+            cursor: pointer;
+
+            &:hover {
+              background-color: #e6b537;
+            }
+
+            &:focus {
+              outline: none;
+              box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            }
           }
         }
       }
@@ -131,7 +220,7 @@
     .right-side {
       width: 40%;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      padding-top: 0px;
+      padding: 0;
       border-top-right-radius: 9px;
       border-bottom-right-radius: 9px;
       color: var(--text-color-inverted);
@@ -290,6 +379,10 @@
           border: 1px solid var(--primary-color);
           color: var(--text-color-inverted);
           font-size: 14px;
+
+          &:focus {
+            outline: none;
+          }
         }
       }
 
@@ -312,6 +405,15 @@
           }
         }
 
+        .tax-container {
+          display: flex;
+          justify-content: space-between;
+
+          .tax {
+            font-size: 14px;
+          }
+        }
+
         .tips-container {
           display: flex;
           justify-content: space-between;
@@ -321,11 +423,11 @@
           }
         }
 
-        .tax-container {
+        .promotion-container {
           display: flex;
           justify-content: space-between;
 
-          .tax {
+          .promotion {
             font-size: 14px;
           }
         }
@@ -365,13 +467,25 @@
         margin-left: 5%;
         padding: 20px;
         gap: 15px;
-        margin-bottom: 10px;
 
         display: flex;
         justify-content: space-between;
 
         .change {
           font-size: 14px;
+        }
+      }
+
+      .complete-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 15px;
+
+        .complete-button {
+          padding: 15px 20px;
+          background-color: var(--primary-color);
+          border-radius: 8px;
         }
       }
     }

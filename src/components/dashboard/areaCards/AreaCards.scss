@@ -3,6 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   margin-top: 12px;
   gap: 16px;
+  background-color: red;
 
   @media (max-width: 992px) {
     grid-template-columns: repeat(2, 1fr);
