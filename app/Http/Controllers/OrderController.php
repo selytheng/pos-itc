@@ -125,7 +125,7 @@ class OrderController extends Controller
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
-    // Get all orders
+    // Get order by ID
     public function getById($id){
         $order = Detail::find($id);
         return response()->json($order,200);
