@@ -16,6 +16,7 @@ const OrdersList = () => {
   const [tax, setTax] = useState(0);
   const [total, setTotal] = useState(0);
   const [change, setChange] = useState(0);
+  const [productDetails, setProductDetails] = useState({});
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -29,6 +30,29 @@ const OrdersList = () => {
     };
 
     fetchOrders();
+  }, []);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const token = localStorage.getItem("access_token"); // Replace with your actual access token
+        const response = await axios.get("http://34.123.7.14/api/products", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        const products = response.data;
+        const productsMap = {};
+        products.forEach((product) => {
+          productsMap[product.code] = product.name;
+        });
+        setProductDetails(productsMap);
+      } catch (err) {
+        setError("Failed to fetch product details");
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   useEffect(() => {
@@ -154,7 +178,7 @@ const OrdersList = () => {
                     <tbody className="table-tbody">
                       {selectedOrder.order_details.map((detail) => (
                         <tr key={detail.id}>
-                          <td>{detail.product_code}</td>
+                          <td>{productDetails[detail.product_code]}</td>
                           <td>{detail.quantity}</td>
                           <td>{detail.unit_price}</td>
                           <td>

@@ -102,21 +102,26 @@ const UserBody = ({ currentRole }) => {
     if (editUser) {
       try {
         const response = await fetch(
-          `http://34.123.7.14/api/auth/update/${editUser.id}`,
+          `http://34.123.7.14/api/auth/${editUser.id}`, // Use the correct URL format
           {
-            method: "PUT",
+            method: "PUT", // PUT method for updating the user
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(editUser),
+            body: JSON.stringify({
+              name: editUser.name,
+              email: editUser.email,
+              role_id: editUser.role_id,
+              password: editUser.password,
+              password_confirmation: editUser.c_password,
+            }),
           }
         );
 
         if (response.ok) {
           await response.json();
-          // Fetch users again after successful update
-          fetchUsers();
+          fetchUsers(); // Fetch users again after successful update
           setEditUser(null);
           setDropdownVisible(null); // Close the dropdown after saving changes
         } else {
@@ -138,8 +143,7 @@ const UserBody = ({ currentRole }) => {
 
         if (response.ok) {
           await response.json();
-          // Fetch users again after successful addition
-          fetchUsers();
+          fetchUsers(); // Fetch users again after successful addition
           setNewUser({
             name: "",
             email: "",
