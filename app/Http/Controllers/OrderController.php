@@ -113,6 +113,23 @@ class OrderController extends Controller
         }
     }
 
+    // Get all orders
+    public function getAllOrders(){
+        try {
+            $orders = Order::with('orderDetails', 'cashier')->get();
+            return response()->json(['orders' => $orders,], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to retrieve orders.', 
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    // Get all orders
+    public function getById($id){
+        $order = Detail::find($id);
+        return response()->json($order,200);
+    }
     // Method to calculate total items ordered
     public function totalItemsOrdered(){
         try {

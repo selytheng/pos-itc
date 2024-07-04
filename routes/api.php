@@ -49,5 +49,7 @@ Route::group([
 
 
 Route::post('/orders', [OrderController::class, 'store']);
+Route::get('/getAllOrders', [OrderController::class, 'getAllOrders']);
+Route::get('/getOrderById/{id}', [OrderController::class, 'getById']);
 Route::get('/total-sales', [OrderController::class, 'totalSales']);
 Route::get('/total-items', [OrderController::class, 'totalItemsOrdered']);
