@@ -104,19 +104,6 @@ const Sidebar = () => {
             </li>
             <li className="menu-item">
               <Link
-                to="/payment"
-                className={`menu-link ${
-                  activeLink === "/payment" ? "active" : ""
-                }`}
-              >
-                <span className="menu-link-icon">
-                  <MdOutlineAttachMoney size={20} />
-                </span>
-                <span className="menu-link-text">Payment</span>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link
                 to="/orders"
                 className={`menu-link ${
                   activeLink === "/orders" ? "active" : ""
@@ -130,6 +117,19 @@ const Sidebar = () => {
             </li>
             <li className="menu-item">
               <Link
+                to="/payment"
+                className={`menu-link ${
+                  activeLink === "/payment" ? "active" : ""
+                }`}
+              >
+                <span className="menu-link-icon">
+                  <MdOutlineAttachMoney size={20} />
+                </span>
+                <span className="menu-link-text">Payment</span>
+              </Link>
+            </li>
+            <li className="menu-item">
+              <Link
                 to="/products"
                 className={`menu-link ${
                   activeLink === "/products" ? "active" : ""
@@ -139,19 +139,6 @@ const Sidebar = () => {
                   <MdOutlineShoppingBag size={20} />
                 </span>
                 <span className="menu-link-text">Products</span>
-              </Link>
-            </li>
-            <li className="menu-item">
-              <Link
-                to="/customer"
-                className={`menu-link ${
-                  activeLink === "/customer" ? "active" : ""
-                }`}
-              >
-                <span className="menu-link-icon">
-                  <MdOutlinePeople size={20} />
-                </span>
-                <span className="menu-link-text">Customer</span>
               </Link>
             </li>
             <li className="menu-item">

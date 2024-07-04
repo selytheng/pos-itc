@@ -13,7 +13,6 @@ import LoginPage from "./pages/login/LoginPage";
 import SignUp from "./pages/register/RegisterPage";
 import PaymentPage from "./pages/payment/PaymentPage";
 import StatisticsPage from "./pages/statistics/StatisticsPage";
-import Customer from "./pages/customer/CustomerPage";
 
 function App() {
   return (
@@ -26,7 +25,6 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/statistics" element={<StatisticsPage />} />
-            <Route path="/customer" element={<Customer />} />
             <Route path="/users" element={<UserPage />} />
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/products" element={<ProductPage />} />

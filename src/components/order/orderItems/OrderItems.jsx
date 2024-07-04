@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import OrderItemCard from "./OrderItem";
 import "./OrderItems.scss";
 import PropTypes from "prop-types";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+import { PaymentContext } from "../../../context/PaymentContext"; // Adjust import based on your file structure
 
 const OrderItemCards = ({ selectedCategoryId }) => {
   const [items, setItems] = useState([]);
@@ -11,6 +12,8 @@ const OrderItemCards = ({ selectedCategoryId }) => {
   const [dropdownOpenSort, setDropdownOpenSort] = useState(false);
   const [sortBy, setSortBy] = useState("Default");
   const token = localStorage.getItem("access_token");
+
+  const { addItemToOrder } = useContext(PaymentContext); // Adjust context based on your file structure
 
   useEffect(() => {
     const fetchOrderItems = async () => {
@@ -39,6 +42,7 @@ const OrderItemCards = ({ selectedCategoryId }) => {
           price: parseFloat(item.unit_price), // Convert price to number
           stock: item.quantity,
           image: item.image,
+          code: item.code,
         }));
         setItems(mappedItems);
       } catch (error) {
@@ -154,8 +158,12 @@ const OrderItemCards = ({ selectedCategoryId }) => {
 
       <div className="content-order-cards">
         {filteredItems.length > 0 ? (
-          filteredItems.map((item, index) => (
-            <OrderItemCard key={index} cardInfo={item} />
+          filteredItems.map((item) => (
+            <OrderItemCard
+              key={item.code}
+              cardInfo={item}
+              onAdd={addItemToOrder}
+            />
           ))
         ) : (
           <div className="no-products-message">No products available</div>
@@ -170,5 +178,3 @@ OrderItemCards.propTypes = {
 };
 
 export default OrderItemCards;
-
-////////////////////////////
