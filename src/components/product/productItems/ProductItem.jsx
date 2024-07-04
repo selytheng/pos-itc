@@ -1,6 +1,3 @@
-// ProductItemCard.jsx
-
-// import "./ProductItemCard.scss"; // Import SCSS file for styling
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
@@ -10,11 +7,11 @@ const ProductItemCard = ({ cardInfo }) => {
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [categories, setCategories] = useState([]);
   const [editedProduct, setEditedProduct] = useState({
-    name,
-    category_id,
-    unit_price: price,
-    quantity: stock,
-    image: initialImage,
+    name: "",
+    category_id: "",
+    unit_price: "",
+    quantity: "",
+    image: null,
     promotion: "",
     alert: "",
     code: "",
@@ -46,6 +43,17 @@ const ProductItemCard = ({ cardInfo }) => {
   const accessToken = localStorage.getItem("access_token");
 
   const handleEditClick = () => {
+    setEditedProduct({
+      name,
+      category_id: "",
+      unit_price: price,
+      quantity: stock,
+      image: initialImage,
+      promotion: "", // Update these values as needed
+      alert: "",
+      code: "",
+      _method: "PATCH",
+    });
     setShowEditDialog(true);
   };
 
@@ -161,6 +169,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="name"
                 value={editedProduct.name}
                 onChange={handleInputChange}
+                required
               />
             </div>
 
@@ -170,7 +179,9 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="category_id"
                 value={editedProduct.category_id}
                 onChange={handleInputChange}
+                required
               >
+                <option value="">Select Category</option>
                 {categories.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -186,6 +197,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="unit_price"
                 value={editedProduct.unit_price}
                 onChange={handleInputChange}
+                required
               />
             </div>
 
@@ -196,6 +208,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="quantity"
                 value={editedProduct.quantity}
                 onChange={handleInputChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -204,6 +217,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
+                required
               />
               {imagePreview && (
                 <img
@@ -220,6 +234,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="promotion"
                 value={editedProduct.promotion}
                 onChange={handleInputChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -229,6 +244,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="alert"
                 value={editedProduct.alert}
                 onChange={handleInputChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -238,6 +254,7 @@ const ProductItemCard = ({ cardInfo }) => {
                 name="code"
                 value={editedProduct.code}
                 onChange={handleInputChange}
+                required
               />
             </div>
             <div className="form-actions">

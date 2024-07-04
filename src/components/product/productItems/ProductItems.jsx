@@ -25,7 +25,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          `http://34.123.7.14/api/categories/${selectedCategoryId}/products`,
+          `https://api.gic-itc.top/api/categories/${selectedCategoryId}/products`,
           {
             method: "GET",
             headers: {
@@ -57,7 +57,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
 
     const fetchCategories = async () => {
       try {
-        const response = await fetch(`http://34.123.7.14/api/categories`, {
+        const response = await fetch(`https://api.gic-itc.top/api/categories`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -113,7 +113,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
     formData.append("code", newProduct.code);
 
     try {
-      const response = await fetch(`http://34.123.7.14/api/products`, {
+      const response = await fetch(`https://api.gic-itc.top/api/products`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -127,7 +127,11 @@ const ProductItemCards = ({ selectedCategoryId }) => {
       }
 
       const addedProduct = await response.json();
-      setItems([...items, addedProduct]);
+      setItems([
+        ...items,
+        { ...addedProduct, category_id: Number(addedProduct.category_id) },
+      ]);
+
       setShowForm(false);
       setNewProduct({
         name: "",
@@ -140,7 +144,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
         code: "",
       });
       console.log("Add Success");
-      window.location.href = "/products";
+      // window.location.href = "/products";
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
