@@ -3,7 +3,7 @@
   align-items: center;
 
   .content-product-menu {
-    width: 95%;
+    width: 100%;
     height: 51px;
     display: flex;
     align-items: start;
@@ -55,23 +55,6 @@
       padding: 5px;
       border: 1px solid var(--base-text-color);
       border-radius: 4px;
-    }
-  }
-
-  .product-menu-settings {
-    width: 5%;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    transition: color 0.3s ease, background-color 0.3s ease;
-
-    &.selected {
-      color: #ffcc3e;
-      font-weight: bold;
-    }
-
-    &:hover {
-      color: #ffcc3e;
     }
   }
 }

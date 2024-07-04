@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import "./ProductMenu.scss";
-import { MdSettings } from "react-icons/md";
 
 const ProductMenu = ({ onSelectMenu, selectedMenu, categories }) => {
   const [indicatorPosition, setIndicatorPosition] = useState({
@@ -47,10 +46,6 @@ const ProductMenu = ({ onSelectMenu, selectedMenu, categories }) => {
             width: `${indicatorPosition.width}px`,
           }}
         />
-      </div>
-
-      <div className="product-menu-settings">
-        <MdSettings size={20} />
       </div>
     </div>
   );
