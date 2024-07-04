@@ -130,6 +130,47 @@ class OrderController extends Controller
         $order = Detail::find($id);
         return response()->json($order,200);
     }
+
+    // Remove product from order
+    public function removeProductFromOrder($orderId, $detailId)
+    {
+        try {
+            $detail = Detail::where('order_id', $orderId)
+                            ->where('id', $detailId)
+                            ->firstOrFail();
+
+            $detail->delete();
+
+            return response()->json(['message' => 'Product removed from order successfully'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Failed to remove product from order', 
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function deleteOrder($orderId)
+    {
+        DB::beginTransaction();
+
+        try {
+            $order = Order::findOrFail($orderId);
+            $order->delete();
+
+            DB::commit();
+
+            return response()->json(['message' => 'Order deleted successfully'], Response::HTTP_OK);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => 'Failed to delete order', 
+                'error' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
     // Method to calculate total items ordered
     public function totalItemsOrdered(){
         try {

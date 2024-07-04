@@ -53,3 +53,5 @@ Route::get('/getAllOrders', [OrderController::class, 'getAllOrders']);
 Route::get('/getOrderById/{id}', [OrderController::class, 'getById']);
 Route::get('/total-sales', [OrderController::class, 'totalSales']);
 Route::get('/total-items', [OrderController::class, 'totalItemsOrdered']);
+Route::delete('/orders/{orderId}/details/{detailId}', [OrderController::class, 'removeProductFromOrder'])->name('orders.removeProduct');
+Route::delete('/orders/{orderId}', [OrderController::class, 'deleteOrder'])->name('orders.destroy');
