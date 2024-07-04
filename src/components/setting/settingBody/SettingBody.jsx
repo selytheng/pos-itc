@@ -49,91 +49,71 @@ const SettingBody = ({ currentSetting }) => {
     }
   }, [theme]);
 
+  const generalSettings = [
+    "About",
+    "Account",
+    "Software Update",
+    "Storage",
+    "Language & Region",
+    "Date & Time",
+    "Location",
+  ];
+
+  const displaySettings = [
+    {
+      label: "Font Size",
+      value: fontSize,
+      onChange: handleFontSizeChange,
+      options: ["12px", "14px", "16px", "18px", "20px"],
+    },
+    {
+      label: "Icon Size",
+      value: iconSize,
+      onChange: handleIconSizeChange,
+      options: ["12px", "14px", "16px", "18px", "20px"],
+    },
+    {
+      label: "Refresh Rate",
+      value: refreshRate,
+      onChange: handleRefreshRateChange,
+      options: ["30hz", "60hz", "120hz", "240hz"],
+    },
+  ];
+
   return (
     <div className="setting-body">
       {currentSetting === "general" && (
         <div className="display-settings">
-          <div className="setting">
-            <div className="setting-function">About</div>
-            <div className="setting-arrow-function">
-              <MdChevronRight />
+          {generalSettings.map((setting, index) => (
+            <div className="setting" key={index}>
+              <div className="setting-function">{setting}</div>
+              <div className="setting-arrow-function">
+                <MdChevronRight />
+              </div>
             </div>
-          </div>
-          <div className="setting">
-            <div className="setting-function">Software Update</div>
-            <div className="setting-arrow-function">
-              <MdChevronRight />
-            </div>
-          </div>
-          <div className="setting">
-            <div className="setting-function">Storage</div>
-            <div className="setting-arrow-function">
-              <MdChevronRight />
-            </div>
-          </div>
-          <div className="setting">
-            <div className="setting-function">Language & Region</div>
-            <div className="setting-arrow-function">
-              <MdChevronRight />
-            </div>
-          </div>
-          <div className="setting">
-            <div className="setting-function">Date & Time</div>
-            <div className="setting-arrow-function">
-              <MdChevronRight />
-            </div>
-          </div>
+          ))}
         </div>
       )}
       {currentSetting === "display" && (
         <div className="display-settings">
-          <div className="setting">
-            <div className="setting-function">Font Size</div>
-            <div className="option-dropdown">
-              <select
-                value={fontSize}
-                onChange={handleFontSizeChange}
-                className="option-select"
-              >
-                <option value="12px">12px</option>
-                <option value="14px">14px</option>
-                <option value="16px">16px</option>
-                <option value="18px">18px</option>
-                <option value="20px">20px</option>
-              </select>
+          {displaySettings.map((setting, index) => (
+            <div className="setting" key={index}>
+              <div className="setting-function">{setting.label}</div>
+              <div className="option-dropdown">
+                <select
+                  value={setting.value}
+                  onChange={setting.onChange}
+                  className="option-select"
+                >
+                  {setting.options.map((option, idx) => (
+                    <option key={idx} value={option}>
+                      {option}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
-          </div>
-          <div className="setting">
-            <div className="setting-function">Icon Size</div>
-            <div className="option-dropdown">
-              <select
-                value={iconSize}
-                onChange={handleIconSizeChange}
-                className="option-select"
-              >
-                <option value="12px">12px</option>
-                <option value="14px">14px</option>
-                <option value="16px">16px</option>
-                <option value="18px">18px</option>
-                <option value="20px">20px</option>
-              </select>
-            </div>
-          </div>
-          <div className="setting">
-            <div className="setting-function">Refresh Rate</div>
-            <div className="option-dropdown">
-              <select
-                value={refreshRate}
-                onChange={handleRefreshRateChange}
-                className="option-select"
-              >
-                <option value="12px">30hz</option>
-                <option value="14px">60hz</option>
-                <option value="16px">120hz</option>
-                <option value="18px">240hz</option>
-              </select>
-            </div>
-          </div>
+          ))}
         </div>
       )}
       {currentSetting === "appearance" && (
