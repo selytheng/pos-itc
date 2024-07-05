@@ -89,7 +89,7 @@ const AreaBarChart = () => {
           sortedData[sortedData.length - 2]?.revenue || 0;
         const percentageChange = lastMonthRevenue
           ? ((totalRevenue - lastMonthRevenue) / lastMonthRevenue) * 100
-          : 0;
+          : 100;
 
         setTotalRevenue(totalRevenue);
         setPercentageChange(percentageChange);
