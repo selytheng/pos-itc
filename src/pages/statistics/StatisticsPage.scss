@@ -87,7 +87,7 @@
   }
 }
 
-.two_cards{
+.two_cards {
   display: flex;
   justify-content: space-between;
 }
@@ -120,7 +120,6 @@
       justify-content: start;
       align-items: center;
       font-size: 14px;
-      
 
       &:hover {
         background: #f5f5f5;
@@ -139,7 +138,7 @@
       border-bottom: 1px solid #e0e0e0;
       margin-top: 20px;
       font-size: 12px;
-      img{
+      img {
         width: 24px;
       }
     }
@@ -157,8 +156,6 @@
       position: relative;
       bottom: 10px;
 
-     
-
       &.complete {
         background-color: #28a745;
       }
@@ -174,8 +171,6 @@
   }
 }
 
-
-
 .order-report-chart {
   background: #fff;
   border-radius: 10px;
@@ -190,7 +185,6 @@
     align-items: center;
     margin-bottom: 50px;
 
-
     h2 {
       font-size: 20px;
     }
@@ -198,8 +192,5 @@
     span {
       color: #888;
     }
-    
   }
- 
-  
 }

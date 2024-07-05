@@ -79,12 +79,12 @@ const StatisticsPage = () => {
   ];
 
   const data = {
-    labels: ["Date In", "To Go", "Delivery"],
+    labels: ["Dine In", "To Go", "Delivery"],
     datasets: [
       {
         data: [200, 200, 200],
-        backgroundColor: ["#FF6384", "#f29a2e", "#36A2EB"],
-        hoverBackgroundColor: ["#FF6384", "#f29a2e", "#36A2EB"],
+        backgroundColor: ["#ffcc3e", "#4ce13f", "#475be8"],
+        hoverBackgroundColor: ["#ffcc3e", "#4ce13f", "#475be8"],
       },
     ],
   };
@@ -133,14 +133,7 @@ const StatisticsPage = () => {
             <tbody>
               {orders.map((order, index) => (
                 <tr key={index}>
-                  <td>
-                    {/* <img
-                      src={user_img}
-                      alt="Customer"
-                      className="profile-icon"
-                    /> */}
-                    {order.customer}
-                  </td>
+                  <td>{order.customer}</td>
                   <td>{order.menu}</td>
                   <td>${order.total}</td>
                   <td className={`status ${order.status.toLowerCase()}`}>
