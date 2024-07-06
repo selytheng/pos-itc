@@ -1,0 +1,30 @@
+.order-area {
+  display: flex;
+  width: 100%;
+}
+
+.item-area {
+  width: 50%;
+
+  @media (max-width: 1080px) {
+    width: 52%;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.payment-area {
+  position: absolute;
+  right: 58px;
+  width: 35%;
+  @media (max-width: 1400px) {
+    right: 33px;
+  }
+  @media (max-width: 1330px) {
+    width: 28.5%;
+  }
+  @media (max-width: 1200px) {
+    width: 40%;
+  }
+}

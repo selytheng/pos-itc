@@ -1,0 +1,41 @@
+import "./App.scss";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import BaseLayout from "./layout/BaseLayout";
+import {
+  Dashboard,
+  PageNotFound,
+  ProductPage,
+  OrderPage,
+  SettingPage,
+  UserPage,
+  PaymentPage,
+} from "./screens";
+import LoginPage from "./pages/login/LoginPage";
+import SignUp from "./pages/register/RegisterPage";
+// import PaymentPage from "./pages/payment/PaymentPage";
+import StatisticsPage from "./pages/statistics/StatisticsPage";
+
+function App() {
+  return (
+    <>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route element={<BaseLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/statistics" element={<StatisticsPage />} />
+            <Route path="/orders" element={<OrderPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/products" element={<ProductPage />} />
+            <Route path="/users" element={<UserPage />} />
+            <Route path="/settings" element={<SettingPage />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Route>
+        </Routes>
+      </Router>
+    </>
+  );
+}
+
+export default App;

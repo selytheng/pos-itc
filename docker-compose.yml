@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  laravel:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./api:/var/www/html
+
+  react:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "8005:80"
+    volumes:
+      - ./web:/usr/src/app
