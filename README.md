@@ -21,6 +21,8 @@ To work on the API, switch to the `test-api-backend` branch:
 git checkout test-api-backend
 ```
 
+### Frontend (React JSX)
+
 To work on the Frontend, switch to the `Lyhab` branch:
 
 ```bash
