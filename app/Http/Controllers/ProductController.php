@@ -91,39 +91,43 @@ class ProductController extends Controller
     }
 
     public function update(Request $req, $id){
-        try{
-            $validator = $req->validate ([
-                'name'          => 'required|string',
-                'code'          => 'required|string',
-                'category_id'   => 'required|integer|exists:categories,id',
-                'unit_price'    => 'required|numeric|min:0|max:999999.99',
-                'quantity'      => 'required|integer', 
-                'image'         => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-                'promotion'     => 'required|integer',
-                'alert'         => 'required|integer',
-            ]);
+    try {
+        $validator = $req->validate([
+            'name'          => 'sometimes|string',
+            'code'          => 'sometimes|string',
+            'category_id'   => 'sometimes|integer|exists:categories,id',
+            'unit_price'    => 'sometimes|numeric|min:0|max:999999.99',
+            'quantity'      => 'sometimes|integer', 
+            'image'         => 'sometimes|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'promotion'     => 'sometimes|integer',
+            'alert'         => 'sometimes|integer',
+        ]);
+
+        $updateProduct = Product::find($id);
+        if (!$updateProduct) {
+            return response()->json(['message' => 'Product not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        // Handle image upload if present
+        if ($req->hasFile('image')) {
             $image = FileUploadController::storeImage($req->file('image'), 'uploads/products');
             $validator['image'] = $image;
-
-            $updateProduct = Product::find($id);
-            if(!$updateProduct){
-                return response()->json(['message'=>'Product not found'], Response::HTTP_NOT_FOUND);
-            }
-             // Update product with timezone conversion
-             $updateProduct->update(array_merge($validator, [
-                'updated_at' => Carbon::now('Asia/Phnom_Penh'),
-            ]));
-
-            // $updateProduct->update($validator);
-            
-            return response()->json($updateProduct, Response::HTTP_CREATED);
-            
-        } catch (ValidationException $e) {
-            return $this->handleValidationException($e);
-        } catch (\Exception $e) {
-            return $this->handleUnexpectedException($e);
         }
+
+        // Update product with timezone conversion
+        $updateProduct->update(array_merge($validator, [
+            'updated_at' => Carbon::now('Asia/Phnom_Penh'),
+        ]));
+
+        return response()->json($updateProduct, Response::HTTP_OK);
+
+    } catch (ValidationException $e) {
+        return $this->handleValidationException($e);
+    } catch (\Exception $e) {
+        return $this->handleUnexpectedException($e);
     }
+}
+
 
     public function delete($id){
         try{

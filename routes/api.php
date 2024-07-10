@@ -42,7 +42,7 @@ Route::group([
     Route::post('/', [ProductController::class, 'create'])->middleware(Authorization::class . ':admin');
     Route::get('/', [ProductController::class, 'get'])->middleware(Authorization::class . ':admin,staff');
     Route::get('/{id}', [ProductController::class, 'getById'])->middleware(Authorization::class . ':admin,staff');
-    Route::patch('/{id}', [ProductController::class, 'update'])->middleware(Authorization::class . ':admin');
+    Route::put('/{id}', [ProductController::class, 'update'])->middleware(Authorization::class . ':admin');
     Route::delete('/{id}', [ProductController::class, 'delete'])->middleware(Authorization::class . ':admin');
     Route::post('/addStock',  [ProductController::class, 'addStock'])->middleware(Authorization::class . ':admin');
 });
