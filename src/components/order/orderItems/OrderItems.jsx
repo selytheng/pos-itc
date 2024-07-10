@@ -17,7 +17,7 @@ const OrderItemCards = ({ selectedCategoryId }) => {
     const fetchOrderItems = async () => {
       try {
         const response = await fetch(
-          `http://34.123.7.14/api/categories/${selectedCategoryId}/products`,
+          `http://localhost:8000/api/categories/${selectedCategoryId}/products`,
           {
             method: "GET",
             headers: {

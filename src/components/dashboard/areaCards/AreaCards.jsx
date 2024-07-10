@@ -18,7 +18,7 @@ const AreaCards = () => {
       try {
         // Fetch today's sales
         const salesResponse = await fetch(
-          "http://34.123.7.14/api/total-sales",
+          "http://localhost:8000/api/total-sales",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -35,7 +35,7 @@ const AreaCards = () => {
 
         // Fetch total ordered items
         const totalOrderedResponse = await fetch(
-          "http://34.123.7.14/api/total-items",
+          "http://localhost:8000/api/total-items",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -52,7 +52,7 @@ const AreaCards = () => {
 
         // Fetch all orders
         const ordersResponse = await fetch(
-          "http://34.123.7.14/api/getAllOrders",
+          "http://localhost:8000/api/getAllOrders",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,

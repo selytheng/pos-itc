@@ -7,7 +7,7 @@ const AreaProgressChart = () => {
 
   useEffect(() => {
     const fetchProductNames = async () => {
-      const response = await fetch("http://34.123.7.14/api/products", {
+      const response = await fetch("http://localhost:8000/api/products", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`, // Replace with actual access token
         },
@@ -21,7 +21,7 @@ const AreaProgressChart = () => {
     };
 
     const fetchMostSoldItems = async () => {
-      const response = await fetch("http://34.123.7.14/api/getAllOrders", {
+      const response = await fetch("http://localhost:8000/api/getAllOrders", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`, // Replace with actual access token
         },

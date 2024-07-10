@@ -22,7 +22,7 @@ const OrderPayment = () => {
   // Fetch the latest order ID and set the initial order number
   const fetchLatestOrderId = async () => {
     try {
-      const response = await fetch("http://34.123.7.14/api/getAllOrders", {
+      const response = await fetch("http://localhost:8000/api/getAllOrders", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ const OrderPayment = () => {
   // Fetch cashier ID
   const fetchCashierId = async () => {
     try {
-      const response = await fetch("http://34.123.7.14/api/auth/me", {
+      const response = await fetch("http://localhost:8000/api/auth/me", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ const OrderPayment = () => {
     }));
 
     try {
-      const response = await fetch("http://34.123.7.14/api/orders", {
+      const response = await fetch("http://localhost:8000/api/orders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -222,7 +222,7 @@ const OrderPayment = () => {
                     <div className="payment-table-image-title-price">
                       <div className="payment-table-item-image">
                         <img
-                          src={`http://34.123.7.14/${item.image}`}
+                          src={`http://localhost:8000/${item.image}`}
                           alt={item.title}
                           className="payment-image"
                           onError={(e) =>

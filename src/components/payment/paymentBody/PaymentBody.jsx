@@ -21,7 +21,9 @@ const OrdersList = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get("http://34.123.7.14/api/getAllOrders");
+        const response = await axios.get(
+          "http://localhost:8000/api/getAllOrders"
+        );
         const sortedOrders = response.data.orders.sort((a, b) => b.id - a.id);
         setOrders(sortedOrders);
       } catch (err) {
@@ -36,7 +38,7 @@ const OrdersList = () => {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem("access_token"); // Replace with your actual access token
-        const response = await axios.get("http://34.123.7.14/api/products", {
+        const response = await axios.get("http://localhost:8000/api/products", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -79,7 +81,9 @@ const OrdersList = () => {
 
   const handleCancelOrder = async () => {
     try {
-      await axios.delete(`http://34.123.7.14/api/orders/${selectedOrder.id}`);
+      await axios.delete(
+        `http://localhost:8000/api/orders/${selectedOrder.id}`
+      );
       // Remove the canceled order from the list
       setOrders(orders.filter((order) => order.id !== selectedOrder.id));
       setSelectedOrder(null); // Clear the selected order
@@ -92,7 +96,7 @@ const OrdersList = () => {
     try {
       // Delete the product from the order
       await axios.delete(
-        `http://34.123.7.14/api/orders/${selectedOrder.id}/details/${detailId}`
+        `http://localhost:8000/api/orders/${selectedOrder.id}/details/${detailId}`
       );
 
       // Remove the product from the selected order details
@@ -106,7 +110,9 @@ const OrdersList = () => {
 
       if (updatedOrderDetails.length === 0) {
         // If there are no more products, delete the entire order
-        await axios.delete(`http://34.123.7.14/api/orders/${selectedOrder.id}`);
+        await axios.delete(
+          `http://localhost:8000/api/orders/${selectedOrder.id}`
+        );
         // Remove the canceled order from the list
         setOrders(orders.filter((order) => order.id !== selectedOrder.id));
         setSelectedOrder(null); // Clear the selected order

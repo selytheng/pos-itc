@@ -17,7 +17,7 @@
 //   useEffect(() => {
 //     const fetchCategories = async () => {
 //       try {
-//         const response = await fetch("http://34.123.7.14/api/categories", {
+//         const response = await fetch("http://localhost:8000/api/categories", {
 //           method: "GET",
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -96,7 +96,7 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://34.123.7.14/api/categories", {
+        const response = await fetch("http://localhost:8000/api/categories", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,

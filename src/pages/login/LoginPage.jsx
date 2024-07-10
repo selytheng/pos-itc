@@ -11,7 +11,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://34.123.7.14/api/auth/login", {
+      const response = await fetch("http://localhost:8000/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,7 +24,7 @@ const LoginPage = () => {
         localStorage.setItem("access_token", data.access_token);
 
         // Fetch user details
-        const userResponse = await fetch("http://34.123.7.14/api/auth/me", {
+        const userResponse = await fetch("http://localhost:8000/api/auth/me", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${data.access_token}`,

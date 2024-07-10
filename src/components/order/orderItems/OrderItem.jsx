@@ -8,7 +8,7 @@ const OrderItemCard = ({ cardInfo, onAdd }) => {
       <div className="order-card-info">
         <img
           className="order-info-image"
-          src={`http://34.123.7.14/${image}`}
+          src={`http://localhost:8000/${image}`}
           alt={title}
         />
         <h5 className="order-info-title">{title}</h5>
