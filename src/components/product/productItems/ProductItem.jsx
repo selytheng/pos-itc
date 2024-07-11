@@ -15,7 +15,7 @@ const ProductItemCard = ({ cardInfo }) => {
     promotion: "",
     alert: "",
     code: "",
-    _method: "PATCH",
+    _method: "PUT",
   });
   const [imagePreview, setImagePreview] = useState(null);
 
@@ -52,7 +52,7 @@ const ProductItemCard = ({ cardInfo }) => {
       promotion: "", // Update these values as needed
       alert: "",
       code: "",
-      _method: "PATCH",
+      _method: "PUT",
     });
     setShowEditDialog(true);
   };
@@ -86,24 +86,28 @@ const ProductItemCard = ({ cardInfo }) => {
     formData.append("alert", editedProduct.alert);
     formData.append("image", editedProduct.image);
     formData.append("code", editedProduct.code);
-    formData.append("_method", "PATCH");
+    formData.append("_method", "PUT");
 
-    const response = await fetch(`http://localhost:8000/api/products/${id}`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: formData,
-    });
+    try {
+      const response = await fetch(`http://localhost:8000/api/products/${id}`, {
+        method: "POST", // Change to PUT method
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      });
 
-    if (response.ok) {
-      // handle successful update (e.g., close dialog, show success message)
-      setShowEditDialog(false);
-      console.log("update successfully");
-      window.location.href = "/products";
-    } else {
-      // handle error
-      console.error("Failed to update product");
+      if (response.ok) {
+        // Handle successful update (e.g., close dialog, show success message)
+        setShowEditDialog(false);
+        console.log("update successfully");
+        window.location.href = "/products";
+      } else {
+        // Handle error
+        console.error("Failed to update product");
+      }
+    } catch (error) {
+      console.error("Error updating product:", error);
     }
   };
 

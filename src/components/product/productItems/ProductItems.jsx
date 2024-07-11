@@ -144,7 +144,7 @@ const ProductItemCards = ({ selectedCategoryId }) => {
         code: "",
       });
       console.log("Add Success");
-      // window.location.href = "/products";
+      window.location.href = "/products";
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
     }
