@@ -7,8 +7,8 @@ Also there is a Docker version
 
 - **API (Laravel) Backend:** `test-api-backend`
 - **Frontend (React JSX):**
-  - **Localhost Development:** `lyhab`
-  - **HTTPS Deployment:** `test-frontend`
+  - **Localhost Development:** `test-frontend`
+  - **HTTPS Deployment:** `test-https-frontend`
 - **Docker:** `docker`
 
 ## Getting Started
@@ -23,8 +23,8 @@ git checkout test-api-backend
 
 ### Frontend (React JSX)
 
-To work on the Frontend, switch to the `Lyhab` branch:
+To work on the Frontend, switch to the `test-frontend` branch:
 
 ```bash
-git checkout Lyhab
+git checkout test-frontend
 ```
