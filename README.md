@@ -8,7 +8,7 @@ Also there is a Docker version
 - **API (Laravel) Backend:** `test-api-backend`
 - **Frontend (React JSX):**
   - **Localhost Development:** `lyhab`
-  - **HTTPS Deployment:** `web-frontend`
+  - **HTTPS Deployment:** `test-frontend`
 - **Docker:** `docker`
 
 ## Getting Started
