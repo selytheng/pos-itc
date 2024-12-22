@@ -17,7 +17,7 @@
 //   useEffect(() => {
 //     const fetchCategories = async () => {
 //       try {
-//         const response = await fetch("http://localhost:8000/api/categories", {
+//         const response = await fetch("https://pos-api.gic-itc.top/api/categories", {
 //           method: "GET",
 //           headers: {
 //             Authorization: `Bearer ${token}`,
@@ -96,13 +96,16 @@ const OrderPage = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/categories", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://pos-api.gic-itc.top/api/categories",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error(

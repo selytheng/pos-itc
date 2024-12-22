@@ -19,13 +19,16 @@ const UserBody = ({ currentRole }) => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/auth/allUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://pos-api.gic-itc.top/api/auth/allUser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         setUsers(data);
@@ -63,13 +66,16 @@ const UserBody = ({ currentRole }) => {
 
   const handleDelete = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/auth/${userId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `https://pos-api.gic-itc.top/api/auth/${userId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         // Fetch users again after successful deletion
@@ -102,7 +108,7 @@ const UserBody = ({ currentRole }) => {
     if (editUser) {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/auth/${editUser.id}`, // Use the correct URL format
+          `https://pos-api.gic-itc.top/api/auth/${editUser.id}`, // Use the correct URL format
           {
             method: "PUT", // PUT method for updating the user
             headers: {
@@ -133,7 +139,7 @@ const UserBody = ({ currentRole }) => {
     } else {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/auth/register",
+          "https://pos-api.gic-itc.top/api/auth/register",
           {
             method: "POST",
             headers: {

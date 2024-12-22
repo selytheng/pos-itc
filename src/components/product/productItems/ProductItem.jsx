@@ -22,11 +22,14 @@ const ProductItemCard = ({ cardInfo }) => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/categories", {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await fetch(
+          "https://pos-api.gic-itc.top/api/categories",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch categories");
         }
@@ -89,13 +92,16 @@ const ProductItemCard = ({ cardInfo }) => {
     formData.append("_method", "PUT");
 
     try {
-      const response = await fetch(`http://localhost:8000/api/products/${id}`, {
-        method: "POST", // Change to PUT method
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `https://pos-api.gic-itc.top/api/products/${id}`,
+        {
+          method: "POST", // Change to PUT method
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         // Handle successful update (e.g., close dialog, show success message)
@@ -116,12 +122,15 @@ const ProductItemCard = ({ cardInfo }) => {
       "Are you sure you want to delete this product?"
     );
     if (confirmDelete) {
-      const response = await fetch(`http://localhost:8000/api/products/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+      const response = await fetch(
+        `https://pos-api.gic-itc.top/api/products/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
       console.log("delete sucessfully");
       window.location.href = "/products";
 
@@ -139,7 +148,7 @@ const ProductItemCard = ({ cardInfo }) => {
       <div className="product-card-info">
         <img
           className="product-info-image"
-          src={imagePreview || `http://localhost:8000/${initialImage}`}
+          src={imagePreview || `https://pos-api.gic-itc.top/${initialImage}`}
           alt={name}
         />
         <h5 className="product-info-title">{name}</h5>

@@ -22,7 +22,7 @@ const OrdersList = () => {
     const fetchOrders = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/getAllOrders"
+          "https://pos-api.gic-itc.top/api/getAllOrders"
         );
         const sortedOrders = response.data.orders.sort((a, b) => b.id - a.id);
         setOrders(sortedOrders);
@@ -38,11 +38,14 @@ const OrdersList = () => {
     const fetchProducts = async () => {
       try {
         const token = localStorage.getItem("access_token"); // Replace with your actual access token
-        const response = await axios.get("http://localhost:8000/api/products", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://pos-api.gic-itc.top/api/products",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         const products = response.data;
         const productsMap = {};
         products.forEach((product) => {
@@ -82,7 +85,7 @@ const OrdersList = () => {
   const handleCancelOrder = async () => {
     try {
       await axios.delete(
-        `http://localhost:8000/api/orders/${selectedOrder.id}`
+        `https://pos-api.gic-itc.top/api/orders/${selectedOrder.id}`
       );
       // Remove the canceled order from the list
       setOrders(orders.filter((order) => order.id !== selectedOrder.id));
@@ -96,7 +99,7 @@ const OrdersList = () => {
     try {
       // Delete the product from the order
       await axios.delete(
-        `http://localhost:8000/api/orders/${selectedOrder.id}/details/${detailId}`
+        `https://pos-api.gic-itc.top/api/orders/${selectedOrder.id}/details/${detailId}`
       );
 
       // Remove the product from the selected order details
@@ -111,7 +114,7 @@ const OrdersList = () => {
       if (updatedOrderDetails.length === 0) {
         // If there are no more products, delete the entire order
         await axios.delete(
-          `http://localhost:8000/api/orders/${selectedOrder.id}`
+          `https://pos-api.gic-itc.top/api/orders/${selectedOrder.id}`
         );
         // Remove the canceled order from the list
         setOrders(orders.filter((order) => order.id !== selectedOrder.id));

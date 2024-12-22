@@ -11,25 +11,31 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://pos-api.gic-itc.top/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         // Successful login, store token and user details in local storage
         localStorage.setItem("access_token", data.access_token);
 
         // Fetch user details
-        const userResponse = await fetch("http://localhost:8000/api/auth/me", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${data.access_token}`,
-          },
-        });
+        const userResponse = await fetch(
+          "https://pos-api.gic-itc.top/api/auth/me",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${data.access_token}`,
+            },
+          }
+        );
         const userData = await userResponse.json();
 
         // Store user details

@@ -7,7 +7,7 @@ const AreaProgressChart = () => {
 
   useEffect(() => {
     const fetchProductNames = async () => {
-      const response = await fetch("http://localhost:8000/api/products", {
+      const response = await fetch("https://pos-api.gic-itc.top/api/products", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`, // Replace with actual access token
         },
@@ -21,11 +21,14 @@ const AreaProgressChart = () => {
     };
 
     const fetchMostSoldItems = async () => {
-      const response = await fetch("http://localhost:8000/api/getAllOrders", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`, // Replace with actual access token
-        },
-      });
+      const response = await fetch(
+        "https://pos-api.gic-itc.top/api/getAllOrders",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`, // Replace with actual access token
+          },
+        }
+      );
       const data = await response.json();
 
       const itemsSold = data.orders.reduce((acc, order) => {

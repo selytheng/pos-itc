@@ -17,7 +17,7 @@ const OrderItemCards = ({ selectedCategoryId }) => {
     const fetchOrderItems = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8000/api/categories/${selectedCategoryId}/products`,
+          `https://pos-api.gic-itc.top/api/categories/${selectedCategoryId}/products`,
           {
             method: "GET",
             headers: {

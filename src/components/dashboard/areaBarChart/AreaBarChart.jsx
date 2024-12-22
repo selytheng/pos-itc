@@ -22,11 +22,14 @@ const AreaBarChart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/getAllOrders", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        });
+        const response = await fetch(
+          "https://pos-api.gic-itc.top/api/getAllOrders",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Network response was not ok");

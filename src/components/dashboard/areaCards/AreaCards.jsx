@@ -18,7 +18,7 @@ const AreaCards = () => {
       try {
         // Fetch today's sales
         const salesResponse = await fetch(
-          "http://localhost:8000/api/total-sales",
+          "https://pos-api.gic-itc.top/api/total-sales",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -35,7 +35,7 @@ const AreaCards = () => {
 
         // Fetch total ordered items
         const totalOrderedResponse = await fetch(
-          "http://localhost:8000/api/total-items",
+          "https://pos-api.gic-itc.top/api/total-items",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -52,7 +52,7 @@ const AreaCards = () => {
 
         // Fetch all orders
         const ordersResponse = await fetch(
-          "http://localhost:8000/api/getAllOrders",
+          "https://pos-api.gic-itc.top/api/getAllOrders",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("access_token")}`,
